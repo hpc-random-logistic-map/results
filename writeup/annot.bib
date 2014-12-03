@@ -1,0 +1,124 @@
+@INPROCEEDINGS{olivier, 
+author={Olivier, S. and Prins, J.}, 
+booktitle={Parallel Processing, 2008. ICPP '08. 37th International Conference on}, 
+title={Scalable Dynamic Load Balancing Using {UPC}}, 
+year={2008}, 
+month={Sept}, 
+pages={123-131}, 
+keywords={parallel programming;resource allocation;tree data structures;tree searching;UPC;Unified Parallel C;asynchronous work-stealing implementation;available work dissemination;distributed memory;scalable dynamic load balancing;shared memory;synthetic tree-structured search space;termination detection cost;unbalanced tree search;Aerodynamics;Computer science;Cost function;Delay;Hardware;Load management;Parallel processing;Protocols;Read-write memory;State-space methods;Unbalanced Tree Search benchmark;Unified Parallel C;distributed memory systems;load balancing;performance analysis;unbalanced parallel computations;work stealing}, 
+doi={10.1109/ICPP.2008.19}, 
+ISSN={0190-3918},
+annote={Olivier and Prins implement an asynchronous work-stealing dynamic load balancer with Unified Parallel C (UPC). They evaluate the performance of their balancer with the Unbalanced Tree Search (UTS) benchmark, which is a synthetic tree-structured search space that is highly imbalanced. They observe parallel efficiency of 80\% using 1024 processors performing over 85,000 total load balancing operations per second continuously. An additional finding is that the careful use of one sided reads and writes is necessary to minimize the communication overhead. The authors' findings indicate that we should minimize the number of read and write operations as we compute solutions to the fixed point equations in order to keep the communication overhad low.}
+}
+
+@article{dlb,
+    author    = {Marc H. Willibeek-LeMair and Anthony P. Reeves},
+    title     = {Strategies for Dynamic Load Balancing on Highly Parallel Computers},
+    journal   = {{IEEE} Transactions on Parallel and Distributed Computing},
+    volume    = {4},
+    month     = {September},
+    number    = {4},
+    year      = {1993},
+    annote    = {Willibeek-LeMair and Reeves discuss five strategies for dynamic load balancing: sender initiated diffusion, receiver initiated diffusion, hierarchical balancing model, gradient model, and dimension exchange method. The authors consider tasks such as:  processor load evaluation, load balancing profitability, task migration, and task selection. Given the trade off between accuracy and increased time for communication, they conclude that the receiver initiated diffusion (RID) is the best method for dynamically load balancing. It is the method that scales the best with the number of processors and requires the least amount of communication overhead. Dynamic load balancing is key for solving systems whose solutions are defined recursively, such as a fixed point iteration. We will use the findings of this paper to guide our program design such that it is the best suited for RID.}
+}
+
+@article{lamb,
+    author    = {Jeroen S.W. Lamb and Martin Rasmussen and Christian S. Rodrigues},
+    title     = {TOPOLOGICAL BIFURCATIONS OF MINIMAL INVARIANT SETS FOR SET-VALUED DYNAMICAL SYSTEMS},
+    journal   = {Proceedings of the American Mathematical Society},
+    year      = {2013},
+    annote    = {Lamb, et. al explore the concept of set-valued bifurcations as an extension of the more common single-valued bifurcation. The kind of problems the authors are interested in are random dynamical systems, such as the Random Logistic Map. This paper serves as a theoretical underpinning for our simulation, and also as a reference for the set-valued bifurcation diagram we plan to generate.}
+}
+
+@article{athreya,
+year={2000},
+journal={Journal of Theoretical Probability},
+volume={13},
+number={2},
+title={Random Logistic Maps.},
+publisher={Kluwer Academic Publishers-Plenum Publishers},
+keywords={random logistic maps; invariant measure},
+author={Athreya, K.B. and Dai, Jack},
+pages={595-608},
+annote={Athreya and Dai explore the concept of a time-varying logistic map. In a sense, they lay out the general groundwork for exploring a spatially-varying logistic map. They find a theoretical explanation for their observations, expressed as probabilities. These findings imply that (and this is beyond the scope of the project) there could be some interesting observations from the spatially-random logistic map, and the observations can be quantified as probabilities. This project's goal is to characterize the map in terms of the average number of period $p$ orbits in any given realization, and also to find the set-valued bifurcation diagram that describes this system.}
+}
+
+
+@online{openmpi:faq,
+author = {{Various contributers: The Open MPI Project}},
+title = {{Open MPI: Open Source High Performance Computing}},
+year = {2014},
+url = {http://www.open-mpi.org/faq/},
+subtitle = {FAQ: Running MPI jobs},
+note = {http://www.open-mpi.org/faq/},
+organization = {{The Open MPI Project}},
+urldate = {17 November 2014},
+annote = {This article goes through frequently asked questions for new MPI users, like most of us in this class. It covers general information and usability, running, and tuning for the best performance. It also suggests performance and analysis tools besides just manual walltime measurement and MFLOP/second measurement, which may give us measurements without crowded walltime syntax.}
+}
+
+@online{openmpi:buffalo,
+author = {{Center for Computational Research}},
+title = {{MPI} and Parallel Computing},
+year = {2004--2014},
+url = {http://www.buffalo.edu/ccr/support/UserGuide/AdvancedTopics/mpi.html},
+subtitle = {FAQ: Running MPI jobs},
+note = {http://www.buffalo.edu/ccr/support/UserGuide/AdvancedTopics/mpi.html},
+urldate = {17 November 2014},
+annote = {This article and corresponding site explain MPI programmimg with a problem focused context when it comes to parallel computing. It contains tutorials for parallel programs and bash scripts involving the slurm workload manager, tutorial slides for the different practical problems that will be solved with MPI and the issues that arise with them. }
+}
+
+@book{chandra2001parallel,
+  title={Parallel programming in OpenMP},
+  author={Chandra, Rohit},
+  year={2001},
+  publisher={Morgan Kaufmann},
+ annote = {The authors of this book were originally SGI engineers who were involved in the design and implementation of OpenMP. The main information avaible about OpenMPI can be found at www.openmp.org. Although full specification of OpenMP is appropriate and complete, it is not a very accessible format for programmers wishing to use OpenMP for developing parallel application. This book tries to fullfill the needs of these programmers. This book can serve as a complete reference guide, also can be the mean tool for exploring options to improve performance on the OpenMP section of the project(removing dependency, load balancing between threads).}
+}
+
+@book{sato2010beyond,
+  title={Beyond Loop Level Parallelism in OpenMP: Accelerators, Tasking and More},
+  author={Sato, Mitsuhisa and Hanawa, Toshihiro and M{\"u}ller, Matthias S and Chapman, Barbara and de Supinski, Bronis R},
+  volume={6132},
+  year={2010},
+  publisher={Springer},
+ annote = {Chapter one of this book, Enabling Low-Overhead Hybrid MPI/OpenMP Parallelism with MPC, introduce a new module to MPC framework handling a fully 2.5-compliant OpenMP runtime completely intergrated to an MPI1.3 implementation. This chapter review strategy how to target oversubscribing capabilities and the possibility to run hybrid MPI/OpenMP application with a limited overhead. This can be really useful for us when implementing our strategy as we are most likely will face the same problem, ie how to optimize performance when implement the hybrid system using limited sharing resources.}
+}
+
+@inproceedings{Folk:2011:OHT:1966895.1966900,
+ author = {Folk, Mike and Heber, Gerd and Koziol, Quincey and Pourmal, Elena and Robinson, Dana},
+ title = {An Overview of the {HDF5} Technology Suite and Its Applications},
+ booktitle = {Proceedings of the {EDBT/ICDT} 2011 Workshop on Array Databases},
+ series = {AD '11},
+ year = {2011},
+ isbn = {978-1-4503-0614-0},
+ location = {Uppsala, Sweden},
+ pages = {36--47},
+ numpages = {12},
+ url = {http://doi.acm.org/10.1145/1966895.1966900},
+ doi = {10.1145/1966895.1966900},
+ acmid = {1966900},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ keywords = {HDF5, data management, data models, databases},
+ annote = {As the title suggests, this paper gives an overview of the functionality provided by HDF5, speaking at a higher, more conceptual level than documentation. Particularly applicable is a section on improving I/O performance. }
+} 
+
+@online{HDF:UserGuide,
+author = {The {HDF} Group},
+title = {{HDF5} User's Guide},
+year = {2014},
+url = {http://www.hdfgroup.org/HDF5/doc/UG/index.html},
+version = {1.8.14},
+note = {http://www.hdfgroup.org/HDF5/doc/UG/index.html},
+organization = {The {HDF} Group},
+date = {18 November 2014},
+annote = {This user's guide covers HDF5 usage in C and Fortran. It is comprehensive and well-organized. A listing of available dataset functions appears to be an especially practical reference.}
+}
+
+
+
+
+
+
+
+
