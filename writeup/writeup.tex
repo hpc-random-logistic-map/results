@@ -1,5 +1,6 @@
 % alt + shift + 1
 % make projname.pdf
+% wordcount: detex writeup.tex | wc -w
 
 \documentclass[12pt]{article}
 %------------------------Dimensions----------------------------
@@ -85,10 +86,10 @@
 \begin{document}
 \pagestyle{plain} %pagenumbers
 \title{CSCI 4/5576: Project Checkpoint \\ The Random Logistic Map}
-\date{November 10, 2014}
+\date{December 17, 2014}
 \author{Amy Le (5576)\\Long Tat (4576)\\Emily Bertelson (4576)\\Kristina Entzel (4576)}
 \maketitle
-\section{Review of Project Goals}
+\section{Abstract}
 The purpose of this project is to characterize the Random Logistic
 Map. In particular, we will be studying the stability of the map,
 which includes locating fixed points and generating bifurcation
@@ -129,8 +130,41 @@ As the map has an element of randomness to it, many
 simulations (a large $\bar{N}$) would be required for statistical analysis. This project is a subset of a larger work in progress
 and requires optimization. A serial implementation has been developed
 in MATLAB. The parallel implementation will be in C++.
+\section{Introduction}
+The following equation is the fixed point iteration that the code
+completes, where $R(x)$ is calculated by manipulating a random number generator.
+\begin{equation}\label{randmap}
+x_{n+1} = R(x_n)x_n(1-x_n)
+\end{equation}
+The exact details of how to calculate $R(x)$ are outlined below.
+\begin{align*}
+\begin{split}
+\ln(R(x)) &= \xi(x)\\
+\xi(x) &= \ln(r) + 2\sum^N_{n=1}a_n\cos(2\pi nx)-b_n\sin(2\pi nx)\\
+a_n,b_n &\sim Unif(-M_n,M_n)\\
+M_n &= \sqrt{1.5S_n}\\
+S_n &= \alpha e^{-L|n|}\\
+\alpha &= \sigma^2 \tanh(L/2)\\
+\sigma &< \ln(4/r)\frac{\tanh(L/4)}{\sqrt{1.5\tanh(L/2)}}
+\end{split}
+\end{align*}
+Where $L \in (0,1)$ represents the correlation length (and is fixed
+for each simulation) and $r \in [0,4]$ is also fixed for each
+simulation. Optimizations implemented in the code conversion:
+\bi
+\item Preferential use of the  multiply and add operators where possible, since
+they less expensive than subtract and divide operators
+\item I used a reduction on the loop that computes the Fourier Series
+  in order to take advantage of the data parallelism with SIMD
+\item Loop structure was reorganized to take advantage of C++ being row-oriented
+\item I used inlining in the C++ code to reduce the number of function calls
+\item The lack of a built in uniform random number generator that generates a random
+double between two doubles made me create a psudeo random number
+implementation with the use of \texttt{rand} and \texttt{srand}.
+\lstinputlisting{rand_ex.m}
+\ei
 
-\section{Project Breakdown}
+\section{Method}
 The general progression of the project is outlined below:
 \be
 \item Convert the Matlab code to C++ (object oriented)
@@ -165,85 +199,8 @@ ourselves.
     plotting\\ \hline
     \end{tabular}
 \end{table}
-\newpage
-\noindent The table below summarizes how we have each progressed:
-\begin {table}[H]
-\centering
-\caption{Progress}
-    \begin{tabular}{ |p{1cm}|p{10cm}|} 
-    \hline
-    Amy &  Converted Matlab code that computes the random function and
-    does the fixed point iteration to C++. In the process of debugging
-    the fixed point iteration; it currently does not converge. \\ \hline
-    Long & Conversion of the Matlab code to C++ underway\\ \hline
-    Kristi & Began converting the Matlab code to C++. Experienced
-    growing pains with learning how to read Matlab syntax.\\ \hline
-    Emily  & Decided on an HDF5 hierarchy to use. In the process of
-    implementing it and modifying code to be HDF5-compatible\\ \hline
-    \end{tabular}
-\end{table}
 
-Details of each of person's progress is enumerated in the Appendix.
-
-% \begin{figure}[H]
-% 	\begin{center}
-% 		\includegraphics[scale=0.7]{deterministic}
-% \caption{The deterministic Logistic Map.}
-% 	\end{center}
-% \end{figure}
-\section{Appendix}
-\subsection{Amy}
-The following equation is the fixed point iteration that the code
-completes, where $R(x)$ is calculated by manipulating a random number generator.
-\begin{equation}\label{randmap}
-x_{n+1} = R(x_n)x_n(1-x_n)
-\end{equation}
-The exact details of how to calculate $R(x)$ are outlined below.
-\begin{align*}
-\begin{split}
-\ln(R(x)) &= \xi(x)\\
-\xi(x) &= \ln(r) + 2\sum^N_{n=1}a_n\cos(2\pi nx)-b_n\sin(2\pi nx)\\
-a_n,b_n &\sim Unif(-M_n,M_n)\\
-M_n &= \sqrt{1.5S_n}\\
-S_n &= \alpha e^{-L|n|}\\
-\alpha &= \sigma^2 \tanh(L/2)\\
-\sigma &< \ln(4/r)\frac{\tanh(L/4)}{\sqrt{1.5\tanh(L/2)}}
-\end{split}
-\end{align*}
-Where $L \in (0,1)$ represents the correlation length (and is fixed
-for each simulation) and $r \in [0,4]$ is also fixed for each
-simulation. Optimizations implemented in the code conversion:
-\bi
-\item Preferential use of the  multiply and add operators where possible, since
-they less expensive than subtract and divide operators
-\item I used a reduction on the loop that computes the Fourier Series
-  in order to take advantage of the data parallelism with SIMD
-\item Loop structure was reorganized to take advantage of C++ being row-oriented
-\item I used inlining in the C++ code to reduce the number of function calls
-\item The lack of a built in uniform random number generator that generates a random
-double between two doubles made me create a psudeo random number
-implementation with the use of \texttt{rand} and \texttt{srand}.
-\lstinputlisting{rand_ex.m}
-\ei
-\subsection{Long}
-I am responsible for converting the prob\_of\_orbits.m file into a C plus plus file. There is a breakdown of three steps process should be done in order for this to work.
-
-Step 1: convert the file into cpp file. This is already done. Basic testing should be done.
-
-Step 2: Synchronizing the code with other part of the other. 
-
-Testing functionality of the code once coweb and orbit code is done converted to C
-
-Step 3: Parallelizing the code. 
-
-Optimizing and benchmarking. 
-
-Step 4: Using the Work balancer.
-
-Step 1 should be done by the night.
-
-Step 2, 3 and 4 will be our next steps to move to finish the project.
-\subsection{Emily}
+\subsection{HDF5}
 A structure for the file has been devised:
 \begin{tabbing}
 	\hspace{5mm} group ``$x_{0}$'' \\
@@ -257,9 +214,18 @@ A structure for the file has been devised:
 					\hspace{25mm} (order) ($x$ location) \\	
 \end{tabbing}
 The structure will be implemented over the next week. From there, HDF5 compatibility will be implemented in code where relevant.
+\section{Results}
+\section{Conclusion}
 
+
+% \begin{figure}[H]
+% 	\begin{center}
+% 		\includegraphics[scale=0.7]{deterministic}
+% \caption{The deterministic Logistic Map.}
+% 	\end{center}
+% \end{figure}
 
 \bibliographystyle{plain}
-\bibliography{proposal}
+\bibliography{annot}
 
 \end{document}

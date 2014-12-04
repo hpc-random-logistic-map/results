@@ -18,7 +18,7 @@ LATEX		= latex
 BIBTEX		= bibtex
 FIG2DEV		= fig2dev
 
-default: checkpoint.pdf
+default: writeup.pdf
 
 #
 # This first section contains macros whose values that you need to
@@ -28,7 +28,7 @@ default: checkpoint.pdf
 # MAIN_TEX: In order to build your file, fill in the MAIN_TEX macro
 # with the name of your main .tex file -- the one that you invoke
 # LaTeX on.
-MAIN_TEX	= checkpoint.pdf
+MAIN_TEX	= writeup.tex
 
 
 # OTHER_TEX_FILES: Put in the names of all the other files that your
