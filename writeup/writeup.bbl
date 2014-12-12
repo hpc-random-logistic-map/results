@@ -1,10 +1,32 @@
 \begin{thebibliography}{1}
 
+\bibitem{athreya}
+K.B. Athreya and Jack Dai.
+\newblock Random logistic maps.
+\newblock {\em Journal of Theoretical Probability}, 13(2):595--608, 2000.
+
+\bibitem{folk}
+Mike Folk, Gerd Heber, Quincey Koziol, Elena Pourmal, and Dana Robinson.
+\newblock An overview of the {HDF5} technology suite and its applications.
+\newblock In {\em Proceedings of the {EDBT/ICDT} 2011 Workshop on Array
+  Databases}, AD '11, pages 36--47, New York, NY, USA, 2011. ACM.
+
+\bibitem{UserGuide}
+The~{HDF} Group.
+\newblock {HDF5} user's guide, 2014.
+\newblock http://www.hdfgroup.org/HDF5/doc/UG/index.html.
+
 \bibitem{lamb}
 Jeroen~S.W. Lamb, Martin Rasmussen, and Christian~S. Rodrigues.
 \newblock Topological bifurcations of minimal invariant sets for set-valued
   dynamical systems.
 \newblock {\em Proceedings of the American Mathematical Society}, 2013.
+
+\bibitem{olivier}
+S.~Olivier and J.~Prins.
+\newblock Scalable dynamic load balancing using {UPC}.
+\newblock In {\em Parallel Processing, 2008. ICPP '08. 37th International
+  Conference on}, pages 123--131, Sept 2008.
 
 \bibitem{dlb}
 Marc~H. Willibeek-LeMair and Anthony~P. Reeves.

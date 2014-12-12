@@ -123,6 +123,11 @@ simulations (a large $\bar{N}$) would be required for statistical analysis. This
 and requires optimization. A serial implementation has been developed
 in MATLAB. The parallel implementation will be in C++.
 \section{Introduction}
+There are two ways to vary the deterministic map. We can simulate the
+parameter $r$ as a function of time or space. The existing literature
+explore the notion of randomness in time, so we explore $r$ as a
+function of space \cite{athreya}.
+
 The following equation is the fixed point iteration that the code
 completes, where $R(x)$ is calculated by manipulating a random number generator.
 \begin{equation}\label{randmap}
@@ -221,7 +226,8 @@ ourselves.
 \caption{Load balancer.}
 	\end{center}
 \end{figure}
-
+We researched types of load balancers \cite{olivier}. We found there
+are many strategies for load balancing \cite{dlb}.
 \subsection{HDF5}
 A structure for the file has been devised:
 \begin{tabbing}
@@ -249,7 +255,8 @@ A structure for the file has been devised:
   \hspace{15mm} $ (x_{1},x_2,...x_k, r, p=k)$ \\
 \end{tabbing}
 
-The structure will be implemented over the next week. From there, HDF5 compatibility will be implemented in code where relevant.
+From there, HDF5 compatibility will be implemented in code where
+relevant \cite{folk} \cite{UserGuide}. 
 \section{Results}
 \begin{figure}[H]
 	\begin{center}
@@ -297,14 +304,7 @@ The structure will be implemented over the next week. From there, HDF5 compatibi
 \end{figure}
 
 \section{Conclusion}
-
-
-% \begin{figure}[H]
-% 	\begin{center}
-% 		\includegraphics[scale=0.7]{deterministic}
-% \caption{The deterministic Logistic Map.}
-% 	\end{center}
-% \end{figure}
+\subsection{Future Work}
 
 \bibliographystyle{plain}
 \bibliography{annot}
