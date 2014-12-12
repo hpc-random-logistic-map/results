@@ -82,6 +82,57 @@
 \author{Amy Le (5576)\\Long Tat (4576)\\Emily Bertelson (4576)\\Kristina Entzel (4576)}
 \maketitle
 \section{Abstract}
+Some small paragraph summarizing the project. Can be written at the end.
+\section{Introduction}
+The Logistic map is a quadratic recursive equation on the domain
+[0,1]. It is a popularly studied topic in nonlinear dynamics and has
+applications in population modeling. There is one parameter in the
+expression, $r$, which can take any value in the range [0,4]. 
+\begin{equation*}
+\hat{f}(x) = rx(1-x)
+\end{equation*}
+For values of $r \in [3.5,4]$, the system experiences the onset of
+chaos. Between $r \in [0,3.5]$, we observe stable periodic orbits. 
+
+There are two ways to vary the deterministic map. We can simulate the
+parameter $r$ as a function of time or space. The existing literature
+explore the notion of randomness in time, so we explore $r$ as a
+function of space \cite{athreya}.
+
+The following equation is the fixed point iteration that the code
+completes, where $R(x)$ is calculated by manipulating a random number generator.
+\begin{equation}\label{randmap}
+x_{n+1} = R(x_n)x_n(1-x_n)
+\end{equation}
+The exact details of how to calculate $R(x)$ are outlined below.
+\begin{align*}
+\begin{split}
+\ln(R(x)) &= \xi(x)\\
+\xi(x) &= \ln(r) + 2\sum^N_{n=1}a_n\cos(2\pi nx)-b_n\sin(2\pi nx)\\
+a_n,b_n &\sim Unif(-M_n,M_n)\\
+M_n &= \sqrt{1.5S_n}\\
+S_n &= \alpha e^{-L|n|}\\
+\alpha &= \sigma^2 \tanh(L/2)\\
+\sigma &< \ln(4/r)\frac{\tanh(L/4)}{\sqrt{1.5\tanh(L/2)}}
+\end{split}
+\end{align*}
+Where $L \in (0,1)$ represents the correlation length (and is fixed
+for each simulation) and $r \in [0,4]$ is also fixed for each
+simulation. 
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=0.7]{det_cobweb}
+\caption{nonrandom case}
+	\end{center}
+\end{figure}
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=0.7]{rand_cobweb}
+\caption{One instance of a random logistic map. This is a preliminary result from the serial implementation.}
+	\end{center}
+\end{figure}
 The purpose of this project is to characterize the Random Logistic
 Map. In particular, we will be studying the stability of the map,
 which includes locating fixed points and generating bifurcation
@@ -122,46 +173,6 @@ As the map has an element of randomness to it, many
 simulations (a large $\bar{N}$) would be required for statistical analysis. This project is a subset of a larger work in progress
 and requires optimization. A serial implementation has been developed
 in MATLAB. The parallel implementation will be in C++.
-\section{Introduction}
-There are two ways to vary the deterministic map. We can simulate the
-parameter $r$ as a function of time or space. The existing literature
-explore the notion of randomness in time, so we explore $r$ as a
-function of space \cite{athreya}.
-
-The following equation is the fixed point iteration that the code
-completes, where $R(x)$ is calculated by manipulating a random number generator.
-\begin{equation}\label{randmap}
-x_{n+1} = R(x_n)x_n(1-x_n)
-\end{equation}
-The exact details of how to calculate $R(x)$ are outlined below.
-\begin{align*}
-\begin{split}
-\ln(R(x)) &= \xi(x)\\
-\xi(x) &= \ln(r) + 2\sum^N_{n=1}a_n\cos(2\pi nx)-b_n\sin(2\pi nx)\\
-a_n,b_n &\sim Unif(-M_n,M_n)\\
-M_n &= \sqrt{1.5S_n}\\
-S_n &= \alpha e^{-L|n|}\\
-\alpha &= \sigma^2 \tanh(L/2)\\
-\sigma &< \ln(4/r)\frac{\tanh(L/4)}{\sqrt{1.5\tanh(L/2)}}
-\end{split}
-\end{align*}
-Where $L \in (0,1)$ represents the correlation length (and is fixed
-for each simulation) and $r \in [0,4]$ is also fixed for each
-simulation. 
-
-\begin{figure}[H]
-	\begin{center}
-		\includegraphics[scale=0.7]{det_cobweb}
-\caption{nonrandom case}
-	\end{center}
-\end{figure}
-
-\begin{figure}[H]
-	\begin{center}
-		\includegraphics[scale=0.7]{rand_cobweb}
-\caption{One instance of a random logistic map. This is a preliminary result from the serial implementation.}
-	\end{center}
-\end{figure}
 
 \section{Method}
 The general progression of the project is outlined below:
