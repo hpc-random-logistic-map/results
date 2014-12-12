@@ -47,14 +47,6 @@
 \newcommand{\bv} {{\bf v}}
 \newcommand{\bD} {{\bf D}}
 
-\newenvironment{definition}[1][Definition:]{\begin{trivlist}
-\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
-\newenvironment{thm}[1][Theorem:]{\begin{trivlist}
-\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
-\newenvironment{example}[1][Example]{\begin{trivlist}
-\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
-
-
 \definecolor{listinggray}{gray}{0.9}
 \definecolor{lbcolor}{rgb}{0.9,0.9,0.9}
 \lstset{
@@ -85,7 +77,7 @@
 
 \begin{document}
 \pagestyle{plain} %pagenumbers
-\title{CSCI 4/5576: Project Checkpoint \\ The Random Logistic Map}
+\title{CSCI 4/5576: The Random Logistic Map}
 \date{December 17, 2014}
 \author{Amy Le (5576)\\Long Tat (4576)\\Emily Bertelson (4576)\\Kristina Entzel (4576)}
 \maketitle
@@ -164,6 +156,21 @@ implementation with the use of \texttt{rand} and \texttt{srand}.
 \lstinputlisting{rand_ex.m}
 \ei
 
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=0.7]{det_cobweb}
+\caption{nonrandom case}
+	\end{center}
+\end{figure}
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=0.7]{rand_cobweb}
+\caption{One instance of a random logistic map. This is a preliminary result from the serial implementation.}
+	\end{center}
+\end{figure}
+
 \section{Method}
 The general progression of the project is outlined below:
 \be
@@ -200,21 +207,56 @@ ourselves.
     \end{tabular}
 \end{table}
 
+\subsection{Load Balancer}
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=0.4]{load_balancer}
+\caption{Load balancer.}
+	\end{center}
+\end{figure}
+
 \subsection{HDF5}
 A structure for the file has been devised:
 \begin{tabbing}
-	\hspace{5mm} group ``$x_{0}$'' \\
-		\hspace{10mm} group ``$r$'' \\
-			\hspace{15mm} attribute ``$l=0.1$'' \\
+	\hspace{5mm} group ``$r$'' \\
+		\hspace{10mm} group ``$L$'' \\
+		\hspace{15mm} group ``$p=1$'' \\
 				\hspace{20mm} dataset \\
-					\hspace{25mm} $(1) \hspace{10mm} (x_{11})$ \\
-					\hspace{25mm} $(2) \hspace{10mm} (x_{21})(x_{22})$ \\
-					\hspace{25mm} $(3) \hspace{10mm} (x_{31})(x_{32})(x_(33)))$ \\
+					\hspace{25mm} $ (x_{1})$ \\
+					\hspace{25mm} $ (x_{2})$ \\
+					\hspace{25mm} $ (x_{3})$ \\
+					\hspace{25mm} ... \\	
+			\hspace{15mm} group ``$p=2$'' \\
+				\hspace{20mm} dataset \\
+					\hspace{25mm}                           $(x_{11},x_{12})$ \\
+					\hspace{25mm} $(x_{21},x_{22})$ \\
 					\hspace{25mm} ... \\
-					\hspace{25mm} (order) ($x$ location) \\	
 \end{tabbing}
+
+\begin{tabbing}
+  \hspace{5mm} group ``$L$'' \\
+  \hspace{10mm} dataset \\
+  \hspace{15mm} $ (x_{1}, r, p=1)$ \\
+  \hspace{15mm} $ (x_{1},x_2, r, p=2)$ \\
+  \hspace{15mm} ... \\
+  \hspace{15mm} $ (x_{1},x_2,...x_k, r, p=k)$ \\
+\end{tabbing}
+
 The structure will be implemented over the next week. From there, HDF5 compatibility will be implemented in code where relevant.
 \section{Results}
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=0.5]{Bifurcation_L1}
+\caption{Bifurcation with $L=0.1$}
+	\end{center}
+\end{figure}
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=0.5]{Bifurcation_L5}
+\caption{Bifurcation with $L=0.1$}
+	\end{center}
+\end{figure}
+
 \section{Conclusion}
 
 
