@@ -1,5 +1,10 @@
 \begin{thebibliography}{1}
 
+\bibitem{janus}
+Research~Computing at~University~of Colorado~Boulder.
+\newblock Load balance tool, 2014.
+\newblock https://www.rc.colorado.edu/node/507.
+
 \bibitem{athreya}
 K.B. Athreya and Jack Dai.
 \newblock Random logistic maps.

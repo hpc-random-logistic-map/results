@@ -5,6 +5,7 @@
      "dlb"
      "lamb"
      "athreya"
+     "janus"
      "openmpi:faq"
      "openmpi:buffalo"
      "chandra2001parallel"

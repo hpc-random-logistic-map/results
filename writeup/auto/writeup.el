@@ -2,6 +2,13 @@
  (lambda ()
     (LaTeX-add-bibliographies
      "annot")
+    (LaTeX-add-labels
+     "lb_hist"
+     "serial_hist"
+     "lb_bif"
+     "serial_bif"
+     "lb_bif_5"
+     "speedup")
     (TeX-add-symbols
      "be"
      "ee"

@@ -84,7 +84,7 @@
 \section{Abstract}
 The purpose of this investigation was to explore and simulate a
 spatially random logistic map using a dynamic load balancer on Janus, the CU
-supercomputer. The recursive nature of the map prevents the individual
+supercomputer \cite{janus}. The recursive nature of the map prevents the individual
 fixed point iterations from being parallelized, but a set of
 iterations maybe load balanced over many cores. The original simulation was written in serial code in
 MATLAB. Our solution has modified the original version for efficiency,
@@ -277,33 +277,33 @@ relevant \cite{folk} \cite{UserGuide}.
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale=0.4]{hist}
-\caption{load balanced histogram}
+\caption{load balanced histogram}\label{lb_hist}
 	\end{center}
 \end{figure}
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale=0.5]{serial_hist}
-\caption{serial histogram}
+\caption{serial histogram}\label{serial_hist}
 	\end{center}
 \end{figure}
 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale=0.5]{Bifurcation_L1}
-\caption{Bifurcation with $L=0.1$}
+\caption{Bifurcation with $L=0.1$}\label{lb_bif}
 	\end{center}
 \end{figure}
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale=0.5]{bif}
-\caption{serial bifurcation}
+\caption{serial bifurcation}\label{serial_bif}
 	\end{center}
 \end{figure}
 
-\begin{figure}[H]
+ \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale=0.5]{Bifurcation_L5}
-\caption{Bifurcation with $L=0.5$}
+\caption{Bifurcation with $L=0.5$}\label{lb_bif_5}
 	\end{center}
 \end{figure}
 \begin{figure}[H]
@@ -315,13 +315,47 @@ relevant \cite{folk} \cite{UserGuide}.
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale=0.5]{speedup_random_logistic}
-\caption{Efficiency}
+\caption{Efficiency}\label{speedup}
 	\end{center}
 \end{figure}
 
 \section{Conclusion}
+Overall, the results of this investigation were positive. Since the
+serial and load balanced versions of the simulation fall in relatively
+the same range of values (Figures
+\ref{serial_hist} and \ref{lb_hist}, and Figures \ref{serial_bif} and
+\ref{lb_bif}), we believe the load-balanced versions output the
+accurate results. The histograms give us an idea of the sort of
+periodic orbits that occur most frequently in the random logistic
+map. The Figures \ref{serial_hist} and \ref{lb_hist} show that the
+most commonly observed orbit is period 1. The bifurcation diagrams
+demonstrate the periodic orbits are highly affected by the correlation
+length $L$ in the simulation. It seems that for larger values of $L$,
+eg. $L=0.5$ (Figure \ref{lb_bif_5}), there are fewer high order
+periodic orbits than for lower values of $L$, eg. $L=0.1$ (Figure \ref{lb_bif}). This is indicated by the
+larger density of white circles on the plot (white circles represent
+period 1).
 \subsection{Future Work}
-
+\subsubsection{Post-simulation processing}
+Our group focused more on the single-core optimization and dynamic
+load balancing aspects of the simulation than on how to most
+efficiently process the simulation data for generating the bifurcation
+diagram and histogram. Some improvements we could work on in the
+future would be to explore how to best remove duplicate orbits (as
+more than one initial condition can converge to the same periodic
+orbit) as we write the data to the HDF5 file. Another improvement
+would be to use the link properties of the HDF5 file format to link
+the data for each bifurcation diagram together, making a new ``view''
+of the data for each kind of bifurcation diagram. 
+\subsubsection{Scaling Study}
+It was surprising that the speedup (Figure \ref{speedup}) plot showed
+the optimal number of nodes is one. We suspect this may be due to the
+fixed problem size we assigned to each set of nodes. Perhaps if the
+problem size (number of initial conditions $x_0$ = number of tasks for
+the load balancer) were larger, we would see a speedup graph that
+increases over some nodes and then plateaus for too many nodes. This
+investigation used 1,000 tasks, but a future scaling study would
+increase the number of tasks to about 10,000 or more.
 \bibliographystyle{plain}
 \bibliography{annot}
 
