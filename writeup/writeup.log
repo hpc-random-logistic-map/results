@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2014.9.16)  3 DEC 2014 15:52
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2014.9.16)  12 DEC 2014 10:34
 entering extended mode
 **writeup
 (c:\Users\amy\Documents\hpc\Project\results\writeup\writeup.tex
@@ -361,25 +361,25 @@ Package: cancel 2013/04/12 v2.2 Cancel math terms
 File: lstlang1.sty 2014/03/04 1.5c listings language file
 )
 (c:\Users\amy\Documents\hpc\Project\results\writeup\writeup.aux)
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 86.
-LaTeX Font Info:    ... okay on input line 86.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 86.
-LaTeX Font Info:    ... okay on input line 86.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 86.
-LaTeX Font Info:    ... okay on input line 86.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 86.
-LaTeX Font Info:    ... okay on input line 86.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 86.
-LaTeX Font Info:    ... okay on input line 86.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 86.
-LaTeX Font Info:    ... okay on input line 86.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 86.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 86.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 78.
+LaTeX Font Info:    ... okay on input line 78.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 78.
+LaTeX Font Info:    ... okay on input line 78.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 78.
+LaTeX Font Info:    ... okay on input line 78.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 78.
+LaTeX Font Info:    ... okay on input line 78.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 78.
+LaTeX Font Info:    ... okay on input line 78.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 78.
+LaTeX Font Info:    ... okay on input line 78.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 78.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 78.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\ts1cmr.fd"
 File: ts1cmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 86.
+LaTeX Font Info:    ... okay on input line 78.
 
 ("C:\Program Files\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -436,11 +436,11 @@ Package caption Info: End \AtBeginDocument code.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 \c@lstlisting=\count131
-LaTeX Font Info:    Try loading font information for U+msa on input line 91.
+LaTeX Font Info:    Try loading font information for U+msa on input line 83.
 ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 91.
+LaTeX Font Info:    Try loading font information for U+msb on input line 83.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -448,42 +448,94 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 {C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}]
 (c:\Users\amy\Documents\hpc\Project\results\writeup\rand_ex.m) [2]
-Overfull \hbox (0.98306pt too wide) in paragraph at lines 195--195
+<det_cobweb.png, id=20, 421.575pt x 316.18124pt>
+File: det_cobweb.png Graphic file (type png)
+ <use det_cobweb.png>
+Package pdftex.def Info: det_cobweb.png used on input line 162.
+(pdftex.def)             Requested size: 295.10048pt x 221.32535pt.
+
+<rand_cobweb.png, id=21, 421.575pt x 316.18124pt>
+File: rand_cobweb.png Graphic file (type png)
+ <use rand_cobweb.png>
+Package pdftex.def Info: rand_cobweb.png used on input line 169.
+(pdftex.def)             Requested size: 295.10048pt x 221.32535pt.
+
+[3 <c:/Users/amy/Documents/hpc/Project/results/writeup/det_cobweb.png (PNG copy
+)> <c:/Users/amy/Documents/hpc/Project/results/writeup/rand_cobweb.png (PNG cop
+y)>]
+Overfull \hbox (0.98306pt too wide) in paragraph at lines 202--202
 []|\OT1/cmr/m/n/12 Kristi| 
  []
 
 
-Overfull \hbox (2.06223pt too wide) in paragraph at lines 197--197
+Overfull \hbox (2.06223pt too wide) in paragraph at lines 204--204
 []|\OT1/cmr/m/n/12 Emily| 
  []
 
-[3] (c:\Users\amy\Documents\hpc\Project\results\writeup\writeup.bbl) [4]
-(c:\Users\amy\Documents\hpc\Project\results\writeup\writeup.aux) ) 
+<load_balancer.png, id=25, 963.6pt x 542.025pt>
+File: load_balancer.png Graphic file (type png)
+ <use load_balancer.png>
+Package pdftex.def Info: load_balancer.png used on input line 213.
+(pdftex.def)             Requested size: 385.43317pt x 216.80615pt.
+
+[4] [5 <c:/Users/amy/Documents/hpc/Project/results/writeup/load_balancer.png>]
+<Bifurcation_L1.png, id=33, 578.16pt x 433.62pt>
+File: Bifurcation_L1.png Graphic file (type png)
+ <use Bifurcation_L1.png>
+Package pdftex.def Info: Bifurcation_L1.png used on input line 249.
+(pdftex.def)             Requested size: 289.07928pt x 216.80946pt.
+
+<Bifurcation_L5.png, id=35, 578.16pt x 433.62pt>
+File: Bifurcation_L5.png Graphic file (type png)
+ <use Bifurcation_L5.png>
+Package pdftex.def Info: Bifurcation_L5.png used on input line 255.
+(pdftex.def)             Requested size: 289.07928pt x 216.80946pt.
+
+<efficiency_random_logistic.png, id=36, 620.0766pt x 423.5022pt>
+File: efficiency_random_logistic.png Graphic file (type png)
+
+<use efficiency_random_logistic.png>
+Package pdftex.def Info: efficiency_random_logistic.png used on input line 261.
+
+(pdftex.def)             Requested size: 310.03754pt x 211.75056pt.
+
+<speedup_random_logistic.png, id=37, 682.2288pt x 423.5022pt>
+File: speedup_random_logistic.png Graphic file (type png)
+
+<use speedup_random_logistic.png>
+Package pdftex.def Info: speedup_random_logistic.png used on input line 267.
+(pdftex.def)             Requested size: 341.11356pt x 211.75056pt.
+ [6 <c:/Users/amy/Documents/hpc/Project/results/writeup/Bifurcation_L1.png> <c:
+/Users/amy/Documents/hpc/Project/results/writeup/Bifurcation_L5.png>]
+(c:\Users\amy\Documents\hpc\Project\results\writeup\writeup.bbl [7 <c:/Users/am
+y/Documents/hpc/Project/results/writeup/efficiency_random_logistic.png> <c:/Use
+rs/amy/Documents/hpc/Project/results/writeup/speedup_random_logistic.png>])
+[8] (c:\Users\amy\Documents\hpc\Project\results\writeup\writeup.aux) ) 
 Here is how much of TeX's memory you used:
- 5863 strings out of 493706
- 85016 string characters out of 3144589
- 225294 words of memory out of 3000000
- 9096 multiletter control sequences out of 15000+200000
+ 5893 strings out of 493706
+ 85810 string characters out of 3144589
+ 225130 words of memory out of 3000000
+ 9118 multiletter control sequences out of 15000+200000
  13762 words of font info for 54 fonts, out of 3000000 for 9000
  1025 hyphenation exceptions out of 8191
  44i,16n,42p,259b,1046s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Program F
-iles/MiKTeX 2.9/fonts/enc/dvips/cm-super/cm-super-ts1.enc}<C:/Program Files/MiK
-TeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Files/MiKTeX 2.9/
-fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX 2.9/fonts/ty
-pe1/public/amsfonts/cm/cmmi12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publ
-ic/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfon
-ts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr
-17.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:
-/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program
- Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files/Mi
-KTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Program Files/MiKTeX 2.9
-/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Program Files/MiKTeX 2.9/fonts/t
-ype1/public/amsfonts/cm/cmtt12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/pub
-lic/cm-super/sfrm1200.pfb>
-Output written on writeup.pdf (4 pages, 151521 bytes).
+{C:/Progr
+am Files/MiKTeX 2.9/fonts/enc/dvips/cm-super/cm-super-ts1.enc}<C:/Program Files
+/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Files/MiKTeX 
+2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX 2.9/font
+s/type1/public/amsfonts/cm/cmmi12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/
+public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/am
+sfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
+/cmr17.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb
+><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Pro
+gram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program File
+s/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Program Files/MiKTeX
+ 2.9/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Program Files/MiKTeX 2.9/fon
+ts/type1/public/amsfonts/cm/cmtt12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1
+/public/cm-super/sfrm1200.pfb>
+Output written on writeup.pdf (8 pages, 335689 bytes).
 PDF statistics:
- 68 PDF objects out of 1000 (max. 8388607)
+ 95 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 36 words of extra memory for PDF output out of 10000 (max. 10000000)
 

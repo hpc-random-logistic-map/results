@@ -2,10 +2,6 @@
  (lambda ()
     (LaTeX-add-bibliographies
      "annot")
-    (LaTeX-add-environments
-     "definition"
-     "thm"
-     "example")
     (LaTeX-add-labels
      "randmap")
     (TeX-add-symbols
