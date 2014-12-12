@@ -2,8 +2,6 @@
  (lambda ()
     (LaTeX-add-bibliographies
      "annot")
-    (LaTeX-add-labels
-     "randmap")
     (TeX-add-symbols
      "be"
      "ee"

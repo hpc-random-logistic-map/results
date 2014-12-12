@@ -82,18 +82,44 @@
 \author{Amy Le (5576)\\Long Tat (4576)\\Emily Bertelson (4576)\\Kristina Entzel (4576)}
 \maketitle
 \section{Abstract}
-Some small paragraph summarizing the project. Can be written at the end.
+The purpose of this investigation was to explore and simulate a
+spatially random logistic map using a dynamic load balancer on Janus, the CU
+supercomputer. The original simulation was written in serial code in
+MATLAB. Our solution has modified the original version for efficiency,
+speed, and scalability. We implemented our simulation in C++ and present our
+results in terms of a histogram of observed periodic orbits and a
+bifurcation diagram. Single core optimization techniques,
+such as SIMD loop vectorization and function inlining, as well as
+using a dynamic load balancer for more efficient work distribution
+were applied. The HDF5 file format was used to store the simulation results in a better archival format. The benchmarking (weak scaling study) results imply the best
+speedup and efficiency is gained when invoking the load balancer on
+one node (12 cores), although we tested our simulation over 16 nodes
+(192 cores). Improvements to this project include optimizing the
+post-simulation data processing. 
 \section{Introduction}
-The Logistic map is a quadratic recursive equation on the domain
+\hspace{5mm}The Logistic map is a quadratic recursive equation on the domain
 [0,1]. It is a popularly studied topic in nonlinear dynamics and has
 applications in population modeling. There is one parameter in the
 expression, $r$, which can take any value in the range [0,4]. 
 \begin{equation*}
-\hat{f}(x) = rx(1-x)
+x_{n+1} = rx_n(1-x_n)
 \end{equation*}
 For values of $r \in [3.5,4]$, the system experiences the onset of
-chaos. Between $r \in [0,3.5]$, we observe stable periodic orbits. 
-
+chaos. Between $r \in [0,3.5]$, we observe stable periodic orbits.
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=0.7]{det_cobweb}
+\caption{Deterministic Logistic Map (blue) for $r=3.2$. There is a stable period
+4 orbit. The order of the period is calculated by counting the number
+of crossings (green) on the line $x_{n+1}=x_n$ (red).}
+	\end{center}
+\end{figure}
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=0.7]{chaos}
+\caption{Deterministic Logistic Map (blue) for $r=3.8$. There is a no stable orbit.}
+	\end{center}
+\end{figure}
 There are two ways to vary the deterministic map. We can simulate the
 parameter $r$ as a function of time or space. The existing literature
 explore the notion of randomness in time, so we explore $r$ as a
@@ -101,9 +127,9 @@ function of space \cite{athreya}.
 
 The following equation is the fixed point iteration that the code
 completes, where $R(x)$ is calculated by manipulating a random number generator.
-\begin{equation}\label{randmap}
+\begin{equation*}
 x_{n+1} = R(x_n)x_n(1-x_n)
-\end{equation}
+\end{equation*}
 The exact details of how to calculate $R(x)$ are outlined below.
 \begin{align*}
 \begin{split}
@@ -119,13 +145,6 @@ S_n &= \alpha e^{-L|n|}\\
 Where $L \in (0,1)$ represents the correlation length (and is fixed
 for each simulation) and $r \in [0,4]$ is also fixed for each
 simulation. 
-
-\begin{figure}[H]
-	\begin{center}
-		\includegraphics[scale=0.7]{det_cobweb}
-\caption{nonrandom case}
-	\end{center}
-\end{figure}
 
 \begin{figure}[H]
 	\begin{center}
