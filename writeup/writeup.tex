@@ -147,20 +147,7 @@ S_n &= \alpha e^{-L|n|}\\
 \end{align*}
 Where $L \in (0,1)$ represents the correlation length (and is fixed
 for each simulation) and $r \in [0,4]$ is also fixed for each
-simulation. Optimizations implemented in the code conversion:
-\bi
-\item Preferential use of the  multiply and add operators where possible, since
-they less expensive than subtract and divide operators
-\item I used a reduction on the loop that computes the Fourier Series
-  in order to take advantage of the data parallelism with SIMD
-\item Loop structure was reorganized to take advantage of C++ being row-oriented
-\item I used inlining in the C++ code to reduce the number of function calls
-\item The lack of a built in uniform random number generator that generates a random
-double between two doubles made me create a psudeo random number
-implementation with the use of \texttt{rand} and \texttt{srand}.
-\lstinputlisting{rand_ex.m}
-\ei
-
+simulation. 
 
 \begin{figure}[H]
 	\begin{center}
@@ -179,46 +166,35 @@ implementation with the use of \texttt{rand} and \texttt{srand}.
 \section{Method}
 The general progression of the project is outlined below:
 \be
-\item Convert the Matlab code to C++ (object oriented)
+\item Convert the Matlab code to C++
 \item Confirm the C++ versions of the code that we each produce work
-  together correctly
-\item Parallelize the C++ code
-\bi
-\item Use MPI to parallelize the mathematical computation
+  together correctly by comparing to the serial version
 \item Invoke the load balancer to assign an initial condition to each
-  fixed point iteration \cite{dlb}
-\ei
-\item Benchmark 
-\bi
-\item strong scaling study (speedup and efficiency)
-\item weak scaling study (speedup and efficiency)
-\ei
+  fixed point iteration 
+\item Benchmark: strong scaling study (speedup and efficiency)
 \ee
 \noindent The table below summarizes how we have subdivided the project among
 ourselves. 
-
-\begin {table}[H]
-\centering
-\caption{Division of Labor}
-    \begin{tabular}{ |p{1cm}|p{10cm}|} 
-    \hline
-    Amy &  make a random number distribution and use the cobweb
-    diagram (fixed point) routine to return a list of subsequent iterations\\ \hline
-    Long & calculate period order, given a list of subsequent iterations  \\ \hline
-    Kristi & calculate the average number of period $p$ orbits, given
-    a list of period locations, period orders, and starting positions\\ \hline
-    Emily  & create the HDF5 file hierarchy to organize the simulation
-    data; use links in the file to generate views of the data for easy
-    plotting\\ \hline
-    \end{tabular}
-\end{table}
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale=0.5]{workflow}
 \caption{Workflow}
 	\end{center}
 \end{figure}
-
+\subsection{Single Core Optimization}
+Optimizations implemented in the code conversion:
+\bi
+\item Preferential use of the  multiply and add operators where possible, since
+they less expensive than subtract and divide operators
+\item I used a reduction on the loop that computes the Fourier Series
+  in order to take advantage of the data parallelism with SIMD
+\item Loop structure was reorganized to take advantage of C++ being row-oriented
+\item I used inlining in the C++ code to reduce the number of function calls
+\item The lack of a built in uniform random number generator that generates a random
+double between two doubles made me create a psudeo random number
+implementation with the use of \texttt{rand} and \texttt{srand}.
+\lstinputlisting{rand_ex.m}
+\ei
 \subsection{Load Balancer}
 \begin{figure}[H]
 	\begin{center}
