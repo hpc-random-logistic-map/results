@@ -84,7 +84,9 @@
 \section{Abstract}
 The purpose of this investigation was to explore and simulate a
 spatially random logistic map using a dynamic load balancer on Janus, the CU
-supercomputer. The original simulation was written in serial code in
+supercomputer. The recursive nature of the map prevents the individual
+fixed point iterations from being parallelized, but a set of
+iterations maybe load balanced over many cores. The original simulation was written in serial code in
 MATLAB. Our solution has modified the original version for efficiency,
 speed, and scalability. We implemented our simulation in C++ and present our
 results in terms of a histogram of observed periodic orbits and a
@@ -145,15 +147,25 @@ S_n &= \alpha e^{-L|n|}\\
 Where $L \in (0,1)$ represents the correlation length (and is fixed
 for each simulation) and $r \in [0,4]$ is also fixed for each
 simulation. 
-
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale=0.7]{rand_cobweb}
-\caption{One instance of a random logistic map. This is a preliminary result from the serial implementation.}
+\caption{One instance of a random logistic map (blue). The map has
+  converged to a stable period 6 orbit (green). Notice the
+  ``wiggliness'' in the parabola shape.}
 	\end{center}
 \end{figure}
-The purpose of this project is to characterize the Random Logistic
-Map. In particular, we will be studying the stability of the map,
+Other instances of the random map would vary from this realization,
+due to the random nature of the map. 
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=0.7]{envelope}
+\caption{A coarse demonstration of the upper (black) and lower (blue) bounds of the
+  random logistic map. Sample realizations are shown in red.}
+	\end{center}
+\end{figure}
+Since the map can take on a range of values for any given position in
+space, it would be useful to characterize some of its properties. In particular, we will be studying the stability of the map,
 which includes locating fixed points and generating bifurcation
 diagrams. The two main goals are:
 \be
@@ -184,15 +196,13 @@ $, and a fixed random function
   its orbit locations (e.g. a period 1 orbit will have 1 fixed point,
   a period 2 orbit will have 2 fixed points, and so on). 
 \bi
-\item Read data from HDF5 file
+\item Use a HDF5 file to store the simulation data and as a source to generate
+  bifurcation diagrams
 \ei
 \ee
 \ee
 As the map has an element of randomness to it, many
-simulations (a large $\bar{N}$) would be required for statistical analysis. This project is a subset of a larger work in progress
-and requires optimization. A serial implementation has been developed
-in MATLAB. The parallel implementation will be in C++.
-
+simulations (a large $\bar{N}$) would be required for statistical analysis. 
 \section{Method}
 The general progression of the project is outlined below:
 \be
