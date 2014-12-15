@@ -291,8 +291,9 @@ in a smaller set of data that was more manageable to graph.
 \subsection{Single Core Optimization}
 Optimizations implemented in the code conversion:
 \bi
-\item Preferential use of the  multiply and add operators where possible, since
-they are less expensive than subtract and divide operators
+\item The aforementioned inefficient I/O practices were optimized
+\item Preferential use of the multiply and add operators where possible, since
+they are less expensive than divide and subtract operators
 \item Used a reduction on the loop that computes the Fourier Series
   in order to take advantage of the data parallelism with SIMD
 \item Loop structure was reorganized to take advantage of C++ being
