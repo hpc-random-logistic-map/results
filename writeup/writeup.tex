@@ -221,6 +221,27 @@ ourselves.
 \caption{Workflow}
 	\end{center}
 \end{figure}
+\subsection{Original Serial Implementation in MATLAB}
+\hspace{5mm} Since Matlab is inherently slower than C++, we expect seeing the code
+speedup simply from porting the code to C++. Besides being written in serial, the code was slow due to some
+inefficient I/O practices. After running a fixed point iteration, the
+code would create a file and write the results to it. In other words,
+for every fixed point iteration, that corresponds with an initial
+condition $x_0$ and a parameter value $r$, a new file is
+created. Furthermore, the data written was not checked until after all
+files were created for uniqueness and convergence. Diverging cases
+where no period orbit was found would create a file full of junk
+data. The data processing steps included reopening all the data files,
+removing duplicates, and sorting. 
+
+To solve these practices we processed the data before writing to a
+single csv file to avoid writing diverging orbits to the file. To
+check uniqueness, we opened the csv file once, and checked line by line
+(each line is a set of data) for uniqueness while comparing to an
+array (in memory) that kept track of the unique data points. If the
+data was unique, it was added to the array. These practices resulted
+in a smaller set of data that was more manageable to graph.
+
 \subsection{Single Core Optimization}
 Optimizations implemented in the code conversion:
 \bi
@@ -239,12 +260,68 @@ implementation with the use of \texttt{rand} and \texttt{srand}.
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale=0.4]{load_balancer}
-\caption{Load balancer.}
+\caption{A load balancer recognizes the number of processors that are going to be used and manages the workload distribution among them. It first assigns all processors a chunk of work, and when a processor finishes the load balancer assigns that processor more work.}
 	\end{center}
 \end{figure}
-We researched types of load balancers \cite{olivier}. We found there
-are many strategies for load balancing \cite{dlb}.
+\hspace{5mm} We researched types of load balancers \cite{olivier}. We found there
+are many strategies for load balancing, such as sender initiated
+diffusion, receiver initiated diffusion, hierarchical balance model, etc. \cite{dlb}. This investigation
+used the Load Balance tool on Janus, which invokes a master-slave
+strategy for balancing \cite{janus}. 
+
+During fixed point iteration, we take a starting value, perform initial calculations, and then use this guess solution to find the next guess, and so on. Each iteration's solution is dependent on the previous iteration's solution, so this calculating the fixed period orbit for a starting point must be done in serial. 
+Some starting values will converge to a fixed period orbit much more
+quickly than others, and some starting values will diverge, and never
+find a fixed period orbit  at all. The fixed point iteration for a
+starting value is completely independent from another starting value,
+so we can parallelize this by assigning each processor a starting
+value to process. This allows us to optimize despite having a variety
+of runtimes. 
+
+First we assign a global $r$ to a node, then a starting value $x_0$ to
+each processor. The diverging calculations will take place on
+processors in parallel to converging calculations on other processors
+and no time is wasted waiting. When a processor has either found a
+solution or run through the 1000 iterations\footnote{The ceiling
+  number of iterations we applied to any given initial condition is
+  1000 iterates.} it stops the calculation and writes the resulting
+fixed period orbits to a csv for that node. 
+
+\subsubsection{Write Locks}
+\hspace{5mm}Originally we had a single csv file for the entire program
+where results would be written to. We ran simulations with different
+initial $r$ and $L$ values across many nodes and wrote all the fixed
+period orbits into a single csv file along with the accompanying
+simulation parameters, $r$ and $L$. This practiced caused unexpected
+I/O problems. The load balancer manages the workload of all processors
+specified in slurm's \texttt{\#SBATCH -N} parameter. However, when we
+used many different instances of the load balancer (invoking the load
+balancer on different sets of jobs, each one independent of the
+other), we observed erratic results due to multiple processors from
+different jobs trying to write to the same file. This means the load
+balancer tool invoked on independent jobs did not communicate between
+the jobs, so upon finding a fixed period orbit, would write to the csv
+file with no consideration of synchronization. The resulting csv was
+an unreadable jumble of partial lines of solutions from different
+nodes\footnote{Upon further reflection, this seems like a logical
+  consequence of calling the load balancer over independent runs.}. 
+
+We resolved this issue by assigning a unique result file to each
+instance that we called the load balancer on. Even though we ended up
+creating as many files as we had nodes, this is still a massive
+improvement in the I/O and number of files created from the original
+implementation. Our final algorithm created $N$ files over $N$ nodes,
+whereas the original implementation created $1000*N$ files over $N$ values
+of $r$ and 1000 initial conditions.
 \subsection{HDF5}
+\hspace{5mm} While the output was initially stored in a
+comma-separated value format, the HDF5 file format was chosen for
+final storage of the data. An intermediary step (\texttt{unique.py})
+removes redundancies from the .csv file before copying the data into
+an HDF5 file (via \texttt{csv2hdf5.py}). 
+
+The hierarchical structures allowed by the HDF5 format were ideal for our uses. We developed a structure with the intention of making the data convenient and efficient to access for the production of a bifurcation diagram and histogram, as well as future analyses.
+
 A structure for the file has been devised:
 \begin{tabbing}
 	\hspace{5mm} group ``$r$'' \\
