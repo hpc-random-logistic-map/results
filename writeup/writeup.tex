@@ -38,6 +38,7 @@
 \usepackage{color}
 \usepackage{array}
 \usepackage{cancel}
+\usepackage[numbers]{natbib}
 
 %------------------------Commands----------------------------
 \newcommand{\be}{\begin{enumerate}}
@@ -99,6 +100,7 @@ one node (12 cores), although we tested our simulation over 16 nodes
 (192 cores). Improvements to this project include optimizing the
 post-simulation data processing. 
 \section{Introduction}
+\subsection{Deterministic case}
 \hspace{5mm}The Logistic map is a quadratic recursive equation on the domain
 [0,1]. It is a popularly studied topic in nonlinear dynamics and has
 applications in population modeling. There is one parameter in the
@@ -111,21 +113,22 @@ x_{n+1} = rx_n(1-x_n)
 		\includegraphics[scale=0.7]{det_cobweb}
 \caption{Deterministic Logistic Map (blue) for $r=3.2$. There is a stable period
 4 orbit. The order of the period is calculated by counting the number
-of crossings (green) on the line $x_{n+1}=x_n$ (red). For values of $r \in [3.5,4]$, the system experiences the onset of
-chaos. Between $r \in [0,3.5]$, we observe stable periodic orbits.}
+of crossings (green) on the line $x_{n+1}=x_n$ (red). Between $r \in [0,3.5]$, we observe stable periodic orbits.}
 	\end{center}
 \end{figure}
-\begin{figure}[H]
+\begin{figure}[H]0rp
 	\begin{center}
 		\includegraphics[scale=0.7]{chaos}
-\caption{Deterministic Logistic Map (blue) for $r=3.8$. There is a no stable orbit.}
+\caption{Deterministic Logistic Map (blue) for $r=3.8$. There is a no
+  stable orbit. For values of $r \in [3.5,4]$, the system experiences the onset of
+chaos.}
 	\end{center}
 \end{figure}
 There are two ways to vary the deterministic map. We can simulate the
 parameter $r$ as a function of time or space. The existing literature
 explore the notion of randomness in time, so we explore $r$ as a
 function of space \cite{athreya}.
-
+\subsection{Random case}
 The following equation is the fixed point iteration that the code
 completes, where $R(x)$ is calculated by manipulating a random number generator.
 \begin{equation*}
@@ -163,6 +166,7 @@ due to the random nature of the map.
   random logistic map. Sample realizations are shown in red.}
 	\end{center}
 \end{figure}
+\subsection{Project Goals}
 Since the map can take on a range of values for any given position in
 space, it would be useful to characterize some of its properties. In particular, we will be studying the stability of the map,
 which includes locating fixed points and generating bifurcation
@@ -245,14 +249,15 @@ in a smaller set of data that was more manageable to graph.
 Optimizations implemented in the code conversion:
 \bi
 \item Preferential use of the  multiply and add operators where possible, since
-they less expensive than subtract and divide operators
-\item I used a reduction on the loop that computes the Fourier Series
+they are less expensive than subtract and divide operators
+\item Used a reduction on the loop that computes the Fourier Series
   in order to take advantage of the data parallelism with SIMD
-\item Loop structure was reorganized to take advantage of C++ being row-oriented
-\item I used inlining in the C++ code to reduce the number of function calls
+\item Loop structure was reorganized to take advantage of C++ being
+  row-oriented (outer loop should go by rows, then inner loops go by columns)
+\item Inlining in the C++ code to reduce the number of function calls
 \item The lack of a built in uniform random number generator that generates a random
-double between two doubles made me create a psudeo random number
-implementation with the use of \texttt{rand} and \texttt{srand}.
+double between two doubles led to the creation of a psudeo random number
+generator with the use of \texttt{rand} and \texttt{srand}.
 \lstinputlisting{rand_ex.m}
 \ei
 \subsection{Load Balancer}
@@ -303,7 +308,11 @@ the jobs, so upon finding a fixed period orbit, would write to the csv
 file with no consideration of synchronization. The resulting csv was
 an unreadable jumble of partial lines of solutions from different
 nodes\footnote{Upon further reflection, this seems like a logical
-  consequence of calling the load balancer over independent runs.}. 
+  consequence of calling the load balancer over independent
+  runs.}. One possible solution is to implement a system of write
+locks, so that only one processor from any given run may write to the
+file at a time. However, this has the potential to create a bottleneck
+for our program. Therefore, we pursued a different strategy.
 
 We resolved this issue by assigning a unique result file to each
 instance that we called the load balancer on. Even though we ended up
@@ -396,30 +405,36 @@ balancer ran in approximately 30 minutes. The benchmarking was
 computed using the C++ code for homogeneity. We tested the code over
 16 nodes (192 processors). 
 
+Running the simulation to generate a bifurcation diagram requires choosing a number of $r$ values you want to graph and running the fixed point
+  iteration on a set of values for that $r$ and an associated set of
+  random coefficients. This means executing
+  \texttt{generate\_rands.exe} for each $r$ to get the correct
+  coefficients. The fixed problem size for benchmarking was testing 40
+  $r$ values between [0,4], and 1000 initial conditions $x_0$ in [0,1]
+  for each value of $r$.
+
+For the serial run,
+  \texttt{generate\_rands.exe} was called 40 times and each initial
+  condition executed serially. For the parallel cases we increase the number of nodes used (from 1 node to 16 nodes), run
+\texttt{generate\_rands.exe} over each value of $r$ and call the load
+balancer which will distribute the work among the increased number of
+processors.
+
 We found that the best Speedup and Efficiency occurred for one node
 (12 processors), though we may expect better Speedup and performance
 with more $r$ values tested (perhaps on the order of 100 instead of 40). It is possible the communication overhead was high in proportion to the amount of work given to each processor due to only finding the solution or 40 values of $r$.
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale=0.5]{efficiency_random_logistic}
-\caption{Efficiency of our code. Running the simulation to generate a bifurcation diagram requires choosing a number of $r$ values you want to graph and running the fixed point
-  iteration on a set of values for that $r$ and an associated set of
-  random coefficients. This means executing
-  \texttt{generate\_rands.exe} for each $r$ to get the correct
-  coefficients. The fixed problem size for benchmarking was testing 40
-  $r$ values between [0,4], and 1000 initial conditions $x_0$ in [0,1]
-  for each value of $r$.}
+\caption{Efficiency of our code. We found that the best Efficiency occurred for one node
+(12 processors).}
 	\end{center}
 \end{figure}
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale=0.5]{speedup_random_logistic}
-\caption{Speedup of our code. For the serial run,
-  \texttt{generate\_rands.exe} was called 40 times and each initial
-  condition executed serially. For the parallel cases we increase the number of nodes used (from 1 node to 16 nodes), run
-\texttt{generate\_rands.exe} over each value of $r$ and call the load
-balancer which will distribute the work among the increased number of
-processors. }\label{speedup}
+\caption{Speedup of our code. We found that the best Speedup occurred for one node
+(12 processors).}\label{speedup}
 	\end{center}
 \end{figure}
 
@@ -460,7 +475,7 @@ the load balancer) were larger, we would see a speedup graph that
 increases over some nodes and then plateaus for too many nodes. This
 investigation used 1,000 tasks, but a future scaling study would
 increase the number of tasks to about 10,000 or more.
-\bibliographystyle{plain}
+\bibliographystyle{apa}
 \bibliography{annot}
 
 \end{document}

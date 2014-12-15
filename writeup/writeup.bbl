@@ -1,42 +1,43 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{}
 
-\bibitem{janus}
-Research~Computing at~University~of Colorado~Boulder.
-\newblock Load balance tool, 2014.
-\newblock https://www.rc.colorado.edu/node/507.
-
-\bibitem{athreya}
-K.B. Athreya and Jack Dai.
+\bibitem[\protect\astroncite{Athreya and Dai}{2000}]{athreya}
+Athreya, K. and Dai, J. (2000).
 \newblock Random logistic maps.
-\newblock {\em Journal of Theoretical Probability}, 13(2):595--608, 2000.
+\newblock {\em Journal of Theoretical Probability}, 13(2):595--608.
 
-\bibitem{folk}
-Mike Folk, Gerd Heber, Quincey Koziol, Elena Pourmal, and Dana Robinson.
+\bibitem[\protect\astroncite{Folk et~al.}{2011}]{folk}
+Folk, M., Heber, G., Koziol, Q., Pourmal, E., and Robinson, D. (2011).
 \newblock An overview of the {HDF5} technology suite and its applications.
 \newblock In {\em Proceedings of the {EDBT/ICDT} 2011 Workshop on Array
-  Databases}, AD '11, pages 36--47, New York, NY, USA, 2011. ACM.
+  Databases}, AD '11, pages 36--47, New York, NY, USA. ACM.
 
-\bibitem{UserGuide}
-The~{HDF} Group.
-\newblock {HDF5} user's guide, 2014.
-\newblock http://www.hdfgroup.org/HDF5/doc/UG/index.html.
-
-\bibitem{lamb}
-Jeroen~S.W. Lamb, Martin Rasmussen, and Christian~S. Rodrigues.
+\bibitem[\protect\astroncite{Lamb et~al.}{2013}]{lamb}
+Lamb, J.~S., Rasmussen, M., and Rodrigues, C.~S. (2013).
 \newblock Topological bifurcations of minimal invariant sets for set-valued
   dynamical systems.
-\newblock {\em Proceedings of the American Mathematical Society}, 2013.
+\newblock {\em Proceedings of the American Mathematical Society}.
 
-\bibitem{olivier}
-S.~Olivier and J.~Prins.
+\bibitem[\protect\astroncite{Olivier and Prins}{2008}]{olivier}
+Olivier, S. and Prins, J. (2008).
 \newblock Scalable dynamic load balancing using {UPC}.
 \newblock In {\em Parallel Processing, 2008. ICPP '08. 37th International
-  Conference on}, pages 123--131, Sept 2008.
+  Conference on}, pages 123--131.
 
-\bibitem{dlb}
-Marc~H. Willibeek-LeMair and Anthony~P. Reeves.
+\bibitem[\protect\astroncite{{Research Computing at University of Colorado
+  Boulder}}{2014}]{janus}
+{Research Computing at University of Colorado Boulder} (2014).
+\newblock Load balance tool.
+\newblock https://www.rc.colorado.edu/node/507.
+
+\bibitem[\protect\astroncite{{The HDF Group}}{2014}]{UserGuide}
+{The HDF Group} (2014).
+\newblock Hdf5 user's guide.
+\newblock http://www.hdfgroup.org/HDF5/doc/UG/index.html.
+
+\bibitem[\protect\astroncite{Willibeek-LeMair and Reeves}{1993}]{dlb}
+Willibeek-LeMair, M.~H. and Reeves, A.~P. (1993).
 \newblock Strategies for dynamic load balancing on highly parallel computers.
 \newblock {\em {IEEE} Transactions on Parallel and Distributed Computing},
-  4(4), September 1993.
+  4(4).
 
 \end{thebibliography}

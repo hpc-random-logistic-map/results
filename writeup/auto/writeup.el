@@ -17,6 +17,8 @@
      "bv"
      "bD")
     (TeX-run-style-hooks
+     "natbib"
+     "numbers"
      "cancel"
      "array"
      "color"
