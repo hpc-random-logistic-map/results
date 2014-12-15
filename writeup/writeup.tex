@@ -261,9 +261,10 @@ will distribute tasks over the available processors\footnote{Each task
   the orbit locations if they exist or return nothing if the map
   diverges. All output from \texttt{myfunc.exe} will be fed into a \texttt{result.csv} associated with that bash script file. Note that we can concatenate all these result files if we want to study the map's behavior as a whole. 
 \item \texttt{csv2hdf5.py}: Convert \texttt{result.csv} to a HDF5 file
-  while using \texttt{unique.py} to check for uniqueness in the data
+  while checking for uniqueness in the data
   set. Save the processed data in an HDF5 file for archival
-  purposes. \texttt{unique.py} also creates a histogram of the data.
+  purposes. 
+\item \texttt{unique.py}: Check for uniqueness in the data set and create a histogram of the data
 \item \texttt{plotbif.py}: Use the HDF5 file to produce the bifurcation diagram. 
 \ee
 
@@ -281,8 +282,8 @@ data. The data processing steps included reopening all the data files,
 removing duplicates, and sorting. 
 
 To solve these practices we processed the data before writing to a
-single csv file to avoid writing diverging orbits to the file. To
-check uniqueness, we opened the csv file once, and checked line by line
+single \texttt{csv} file to avoid writing diverging orbits to the file. To
+check uniqueness, we opened the \texttt{csv} file once, and checked line by line
 (each line is a set of data) for uniqueness while comparing to an
 array (in memory) that kept track of the unique data points. If the
 data was unique, it was added to the array. These practices resulted
@@ -333,14 +334,14 @@ and no time is wasted waiting. When a processor has either found a
 solution or run through the 1000 iterations\footnote{The ceiling
   number of iterations we applied to any given initial condition is
   1000 iterates.} it stops the calculation and writes the resulting
-fixed period orbits to a csv for that node. 
+fixed period orbits to a \texttt{csv} for that node. 
 
 \subsubsection{Write Locks}
-\hspace{5mm}Originally we had a single csv file for the entire program
+\hspace{5mm}Originally we had a single \texttt{csv} file for the entire program
 where results would be written to. We ran simulations with different
 initial $r$ and $L$ values across many nodes and wrote all the fixed
-period orbits into a single csv file along with the accompanying
-simulation parameters, $r$ and $L$. This practiced caused unexpected
+period orbits into a single \texttt{csv} file along with the accompanying
+simulation parameters, $r$ and $L$. This practice caused unexpected
 I/O problems. The load balancer manages the workload of all processors
 specified in slurm's \texttt{\#SBATCH -N} parameter. However, when we
 used many different instances of the load balancer (invoking the load
@@ -348,8 +349,8 @@ balancer on different sets of jobs, each one independent of the
 other), we observed erratic results due to multiple processors from
 different jobs trying to write to the same file. This means the load
 balancer tool invoked on independent jobs did not communicate between
-the jobs, so upon finding a fixed period orbit, would write to the csv
-file with no consideration of synchronization. The resulting csv was
+the jobs, so upon finding a fixed period orbit, would write to the \texttt{csv}
+file with no consideration of synchronization. The resulting \texttt{csv} was
 an unreadable jumble of partial lines of solutions from different
 nodes\footnote{Upon further reflection, this seems like a logical
   consequence of calling the load balancer over independent
@@ -368,8 +369,8 @@ of $r$ and 1000 initial conditions.
 \subsection{HDF5}
 \hspace{5mm} While the output was initially stored in a
 comma-separated value format, the HDF5 file format was chosen for
-final storage of the data. An intermediary step (\texttt{unique.py})
-removes redundancies from the .csv file before copying the data into
+final storage of the data. An intermediate step (\texttt{unique.py})
+removes redundancies from the \texttt{csv} file before copying the data into
 an HDF5 file (via \texttt{csv2hdf5.py}). Two resources were used to
 implement the HDF5 aspect of the project \cite{folk} \cite{UserGuide}. 
 
@@ -500,7 +501,8 @@ with more $r$ values tested (perhaps on the order of 100 instead of 40). It is p
 \section{Conclusion}
 Overall, the results of this investigation were positive. Since the
 serial and load balanced versions of the simulation fall in relatively
-the same range of values (Table \ref{hist}, and Table \ref{bif}), we believe the load-balanced versions output the
+the same range of values (Table \ref{hist} and Table \ref{bif}), we
+believe the load balanced versions output the
 accurate results. The histograms give us an idea of the sort of
 periodic orbits that occur most frequently in the random logistic
 map. Table \ref{hist} shows that the
