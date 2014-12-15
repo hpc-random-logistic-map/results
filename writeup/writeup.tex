@@ -221,9 +221,31 @@ ourselves.
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale=0.5]{workflow}
-\caption{Workflow}
+\caption{Workflow}\label{workflow}
 	\end{center}
 \end{figure}
+
+After profiling the MATLAB code, we realized that our critical path is
+the fixed point iteration calculation, so parallelizing our solver is
+the necessary step to improve our performance. Unlike the problems we
+encountered in class, we did not have a matrix or an array which we
+can decompose and distribute to multiple processors. Our solver uses
+the previous calculation to compute the current calculation. This
+dependency renders parallelization with OpenMP/MPI impossible. 
+
+Upon carefully reviewing our objective, we noticed that this project
+was originally designed to collect data over a range of inputs. If
+parallelizing at the file level is impossible, we look to parallelize
+the project at the simulation level. This is possible because the
+fixed point iterations are independent over a range of initial
+conditions. A load balancer suits our purposes perfectly because the
+load balancer will redistribute work over many processors to eliminate
+wait time. 
+
+The Workflow (Figure \ref{workflow}) demonstrates that the program
+begins with \texttt{generate\_cmdlines.exe}. We start with \texttt{generate\_cmdlines.exe} file which is the set up file for our simulation.
+	\texttt{generate\_cmdlines.exe}: This file will take 4 inputs (L,dr,dx,iter). It will generate all the bash script files. 
+Bash Script files: Each of these bash script will invoke \texttt{generate\_rand.exe} once which will take in with the same L given in \texttt{generate\_cmdlines.exe}, an r value which is uniformly distributed between 0 and 4 with step size dr and an output file. 	
 \subsection{Original Serial Implementation in MATLAB}
 \hspace{5mm} Since Matlab is inherently slower than C++, we expect seeing the code
 speedup simply from porting the code to C++. Besides being written in serial, the code was slow due to some
@@ -365,31 +387,24 @@ bifurcation diagrams.
 \end{tabbing}
 
 \section{Results}
-\begin{figure}[H]
-	\begin{center}
-		\includegraphics[scale=0.4]{hist}
-\caption{load balanced histogram}\label{lb_hist}
-	\end{center}
-\end{figure}
-\begin{figure}[H]
-	\begin{center}
-		\includegraphics[scale=0.5]{serial_hist}
-\caption{serial histogram}\label{serial_hist}
-	\end{center}
-\end{figure}
 
-\begin{figure}[H]
-	\begin{center}
-		\includegraphics[scale=0.5]{Bifurcation_L1}
-\caption{Bifurcation with $L=0.1$}\label{lb_bif}
-	\end{center}
-\end{figure}
-\begin{figure}[H]
-	\begin{center}
-		\includegraphics[scale=0.5]{bif}
-\caption{serial bifurcation}\label{serial_bif}
-	\end{center}
-\end{figure}
+\begin {table}[H]
+\begin{center}
+\begin{tabular}{ p{8cm} p{8cm}}    
+\begin{center}\includegraphics[scale=0.3]{hist}\end{center}&\begin{center} \includegraphics[scale=0.4]{serial_hist}\end{center}
+\end{tabular}
+\caption {Load balanced histogram (left) and Serial histogram (right)} \label{hist}
+\end{center}
+\end {table}
+
+\begin {table}[H]
+\begin{center}
+\begin{tabular}{ p{8cm} p{8cm}}    
+\begin{center}\includegraphics[scale=0.4]{Bifurcation_L1}\end{center}&\begin{center} \includegraphics[scale=0.4]{bif}\end{center}
+\end{tabular}
+\caption {Load balanced Bifurcation with $L=0.1$ (left) and Serial Bifurcation with $L=0.1$ (right)} \label{bif}
+\end{center}
+\end {table}
 
  \begin{figure}[H]
 	\begin{center}
@@ -441,17 +456,15 @@ with more $r$ values tested (perhaps on the order of 100 instead of 40). It is p
 \section{Conclusion}
 Overall, the results of this investigation were positive. Since the
 serial and load balanced versions of the simulation fall in relatively
-the same range of values (Figures
-\ref{serial_hist} and \ref{lb_hist}, and Figures \ref{serial_bif} and
-\ref{lb_bif}), we believe the load-balanced versions output the
+the same range of values (Table \ref{hist}, and Table \ref{bif}), we believe the load-balanced versions output the
 accurate results. The histograms give us an idea of the sort of
 periodic orbits that occur most frequently in the random logistic
-map. The Figures \ref{serial_hist} and \ref{lb_hist} show that the
+map. Table \ref{hist} shows that the
 most commonly observed orbit is period 1. The bifurcation diagrams
 demonstrate the periodic orbits are highly affected by the correlation
 length $L$ in the simulation. It seems that for larger values of $L$,
 eg. $L=0.5$ (Figure \ref{lb_bif_5}), there are fewer high order
-periodic orbits than for lower values of $L$, eg. $L=0.1$ (Figure \ref{lb_bif}). This is indicated by the
+periodic orbits than for lower values of $L$, eg. $L=0.1$ (Table \ref{bif}). This is indicated by the
 larger density of white circles on the plot (white circles represent
 period 1).
 \subsection{Future Work}
