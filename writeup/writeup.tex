@@ -207,25 +207,7 @@ $, and a fixed random function
 As the map has an element of randomness to it, many
 simulations (a large $\bar{N}$) would be required for statistical analysis. 
 \section{Method}
-The general progression of the project is outlined below:
-\be
-\item Convert the Matlab code to C++
-\item Confirm the C++ versions of the code that we each produce work
-  together correctly by comparing to the serial version
-\item Invoke the load balancer to assign an initial condition to each
-  fixed point iteration 
-\item Benchmark: strong scaling study (speedup and efficiency)
-\ee
-\noindent The table below summarizes how we have subdivided the project among
-ourselves. 
-\begin{figure}[H]
-	\begin{center}
-		\includegraphics[scale=0.5]{workflow}
-\caption{Workflow}\label{workflow}
-	\end{center}
-\end{figure}
-
-After profiling the MATLAB code, we realized that our critical path is
+\hspace{5mm} After profiling the MATLAB code, we realized that our critical path is
 the fixed point iteration calculation, so parallelizing our solver is
 the necessary step to improve our performance. Unlike the problems we
 encountered in class, we did not have a matrix or an array which we
@@ -235,17 +217,55 @@ dependency renders parallelization with OpenMP/MPI impossible.
 
 Upon carefully reviewing our objective, we noticed that this project
 was originally designed to collect data over a range of inputs. If
-parallelizing at the file level is impossible, we look to parallelize
+parallelizing at the file level is impossible, we parallelize
 the project at the simulation level. This is possible because the
 fixed point iterations are independent over a range of initial
 conditions. A load balancer suits our purposes perfectly because the
 load balancer will redistribute work over many processors to eliminate
-wait time. 
+wait time. The general progression of the project is outlined below:
+\be
+\item Convert the Matlab code to C++
+\item Confirm the C++ versions of the code that we each produce work
+  together correctly by comparing to the serial version
+\item Invoke the load balancer to assign an initial condition to each
+  fixed point iteration 
+\item Benchmark: strong scaling study (speedup and efficiency)
+\ee
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=0.5]{workflow}
+\caption{Workflow}\label{workflow}
+	\end{center}
+\end{figure}
 
 The Workflow (Figure \ref{workflow}) demonstrates that the program
-begins with \texttt{generate\_cmdlines.exe}. We start with \texttt{generate\_cmdlines.exe} file which is the set up file for our simulation.
-	\texttt{generate\_cmdlines.exe}: This file will take 4 inputs (L,dr,dx,iter). It will generate all the bash script files. 
-Bash Script files: Each of these bash script will invoke \texttt{generate\_rand.exe} once which will take in with the same L given in \texttt{generate\_cmdlines.exe}, an r value which is uniformly distributed between 0 and 4 with step size dr and an output file. 	
+begins with \texttt{generate\_cmdlines.exe}. We start with
+\texttt{generate\_cmdlines.exe} file which is the set up file for our
+simulation.
+\be
+\item \texttt{generate\_cmdlines.exe}: This file will take 4 inputs (L,dr,dx,iter). It will generate all the bash script files. 
+\item Bash Script files: Each of these scripts will invoke
+\texttt{generate\_rands.exe} once which will take in with the same L
+given in \texttt{generate\_cmdlines.exe}, an $r$ value which is
+uniformly distributed between 0 and 4 with step size $dr$ and an output
+file. This outfile contains the randomized parameters $a,b$, used by
+\texttt{myfunc.exe}. This script also invokes the load balancer which
+will distribute tasks over the available processors\footnote{Each task
+  corresponds to executing \texttt{myfunc.exe} with a unique set of
+  parameters: $L,r,x_0,a,b$. Different initial conditions $x_0$ are
+  uniformly distributed between 0 and 1 with step size $dx$}.
+\item \texttt{generate\_rands.exe}: Generate randomized parameters $a,b$ and put it into an output file for given $L$ and $r$ values.
+\item \texttt{myfunc.exe}: Run the fixed point iteration and print out
+  the orbit locations if they exist or return nothing if the map
+  diverges. All output from \texttt{myfunc.exe} will be fed into a \texttt{result.csv} associated with that bash script file. Note that we can concatenate all these result files if we want to study the map's behavior as a whole. 
+\item \texttt{csv2hdf5.py}: Convert \texttt{result.csv} to a HDF5 file
+  while using \texttt{unique.py} to check for uniqueness in the data
+  set. Save the processed data in an HDF5 file for archival
+  purposes. \texttt{unique.py} also creates a histogram of the data.
+\item \texttt{plotbif.py}: Use the HDF5 file to produce the bifurcation diagram. 
+\ee
+
 \subsection{Original Serial Implementation in MATLAB}
 \hspace{5mm} Since Matlab is inherently slower than C++, we expect seeing the code
 speedup simply from porting the code to C++. Besides being written in serial, the code was slow due to some
