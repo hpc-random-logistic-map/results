@@ -3,6 +3,7 @@
     (LaTeX-add-bibliographies
      "annot")
     (LaTeX-add-labels
+     "randlog"
      "workflow"
      "hist"
      "bif"

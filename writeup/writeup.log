@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2014.9.16)  15 DEC 2014 15:13
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2014.9.16)  15 DEC 2014 15:20
 entering extended mode
 **writeup
 (c:\Users\amy\Documents\hpc\Project\results\writeup\writeup.tex
@@ -510,57 +510,57 @@ Package pdftex.def Info: load_balancer.png used on input line 308.
 [9] <hist.png, id=52, 963.6pt x 542.025pt>
 File: hist.png Graphic file (type png)
  <use hist.png>
-Package pdftex.def Info: hist.png used on input line 419.
+Package pdftex.def Info: hist.png used on input line 426.
 (pdftex.def)             Requested size: 289.08223pt x 162.60875pt.
 
-Overfull \hbox (61.46019pt too wide) in paragraph at lines 419--419
+Overfull \hbox (61.46019pt too wide) in paragraph at lines 426--426
  [] 
  []
 
 <serial_hist.png, id=53, 578.16pt x 433.62pt>
 File: serial_hist.png Graphic file (type png)
  <use serial_hist.png>
-Package pdftex.def Info: serial_hist.png used on input line 419.
+Package pdftex.def Info: serial_hist.png used on input line 426.
 (pdftex.def)             Requested size: 231.2599pt x 173.44492pt.
 
-Overfull \hbox (3.63786pt too wide) in paragraph at lines 419--419
+Overfull \hbox (3.63786pt too wide) in paragraph at lines 426--426
  [] 
  []
 
 
-Overfull \hbox (6.59764pt too wide) in paragraph at lines 418--422
+Overfull \hbox (6.59764pt too wide) in paragraph at lines 425--429
  [] 
  []
 
 [10] <Bifurcation_L1.png, id=57, 578.16pt x 433.62pt>
 File: Bifurcation_L1.png Graphic file (type png)
  <use Bifurcation_L1.png>
-Package pdftex.def Info: Bifurcation_L1.png used on input line 429.
+Package pdftex.def Info: Bifurcation_L1.png used on input line 436.
 (pdftex.def)             Requested size: 231.2599pt x 173.44492pt.
 
-Overfull \hbox (3.63786pt too wide) in paragraph at lines 429--429
+Overfull \hbox (3.63786pt too wide) in paragraph at lines 436--436
  [] 
  []
 
 <bif.png, id=59, 578.16pt x 433.62pt>
 File: bif.png Graphic file (type png)
  <use bif.png>
-Package pdftex.def Info: bif.png used on input line 429.
+Package pdftex.def Info: bif.png used on input line 436.
 (pdftex.def)             Requested size: 231.2599pt x 173.44492pt.
 
-Overfull \hbox (3.63786pt too wide) in paragraph at lines 429--429
+Overfull \hbox (3.63786pt too wide) in paragraph at lines 436--436
  [] 
  []
 
 
-Overfull \hbox (6.59764pt too wide) in paragraph at lines 428--436
+Overfull \hbox (6.59764pt too wide) in paragraph at lines 435--443
  [] 
  []
 
 <Bifurcation_L5.png, id=60, 578.16pt x 433.62pt>
 File: Bifurcation_L5.png Graphic file (type png)
  <use Bifurcation_L5.png>
-Package pdftex.def Info: Bifurcation_L5.png used on input line 442.
+Package pdftex.def Info: Bifurcation_L5.png used on input line 449.
 (pdftex.def)             Requested size: 289.07928pt x 216.80946pt.
 
 [11 <c:/Users/amy/Documents/hpc/Project/results/writeup/hist.png (PNG copy)> <c
@@ -571,7 +571,7 @@ s/amy/Documents/hpc/Project/results/writeup/bif.png (PNG copy)>]
 File: efficiency_random_logistic.png Graphic file (type png)
 
 <use efficiency_random_logistic.png>
-Package pdftex.def Info: efficiency_random_logistic.png used on input line 474.
+Package pdftex.def Info: efficiency_random_logistic.png used on input line 485.
 
 (pdftex.def)             Requested size: 310.03754pt x 211.75056pt.
 
@@ -579,7 +579,7 @@ Package pdftex.def Info: efficiency_random_logistic.png used on input line 474.
 File: speedup_random_logistic.png Graphic file (type png)
 
 <use speedup_random_logistic.png>
-Package pdftex.def Info: speedup_random_logistic.png used on input line 481.
+Package pdftex.def Info: speedup_random_logistic.png used on input line 492.
 (pdftex.def)             Requested size: 341.11356pt x 211.75056pt.
  [12 <c:/Users/amy/Documents/hpc/Project/results/writeup/Bifurcation_L5.png>] [
 13 <c:/Users/amy/Documents/hpc/Project/results/writeup/efficiency_random_logist
@@ -593,13 +593,13 @@ p.org/HDF5/doc/UG/index.html.
 
 [14]) [15] (c:\Users\amy\Documents\hpc\Project\results\writeup\writeup.aux) ) 
 Here is how much of TeX's memory you used:
- 6280 strings out of 493706
- 90503 string characters out of 3144589
+ 6281 strings out of 493706
+ 90512 string characters out of 3144589
  230041 words of memory out of 3000000
- 9495 multiletter control sequences out of 15000+200000
+ 9496 multiletter control sequences out of 15000+200000
  14069 words of font info for 55 fonts, out of 3000000 for 9000
  1025 hyphenation exceptions out of 8191
- 44i,16n,42p,575b,1021s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 44i,16n,42p,525b,1021s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C
 :/Program Files/MiKTeX 2.9/fonts/enc/dvips/cm-super/cm-super-ts1.enc}<C:/Progra
 m Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Files/
@@ -617,7 +617,7 @@ ype1/public/amsfonts/cm/cmti12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/pub
 lic/amsfonts/cm/cmtt10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsf
 onts/cm/cmtt12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfr
 m1200.pfb>
-Output written on writeup.pdf (15 pages, 555333 bytes).
+Output written on writeup.pdf (15 pages, 555596 bytes).
 PDF statistics:
  135 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

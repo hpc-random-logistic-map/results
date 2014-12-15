@@ -135,7 +135,7 @@ completes, where $R(x)$ is calculated by manipulating a random number generator.
 x_{n+1} = R(x_n)x_n(1-x_n)
 \end{equation*}
 The exact details of how to calculate $R(x)$ are outlined below.
-\begin{align*}
+\begin{align}\label{randlog}
 \begin{split}
 \ln(R(x)) &= \xi(x)\\
 \xi(x) &= \ln(r) + 2\sum^N_{n=1}a_n\cos(2\pi nx)-b_n\sin(2\pi nx)\\
@@ -145,7 +145,7 @@ S_n &= \alpha e^{-L|n|}\\
 \alpha &= \sigma^2 \tanh(L/2)\\
 \sigma &< \ln(4/r)\frac{\tanh(L/4)}{\sqrt{1.5\tanh(L/2)}}
 \end{split}
-\end{align*}
+\end{align}
 Where $L \in (0,1)$ represents the correlation length (and is fixed
 for each simulation) and $r \in [0,4]$ is also fixed for each
 simulation. 
@@ -407,19 +407,26 @@ bifurcation diagrams.
 \end{tabbing}
 
 \section{Results}
-\hspace{5mm} The results of the two sets of data give us the following histograms and bifurcation diagrams. If our implementation is correct, the results using the load balancer and C++ will strongly resemble the results from the original Matlab code. The nature of the equation makes the exact replication of a single run difficult -- the problem involves random noise. Before implementing the ability to apply extreme constraints to the parameters, we could not replicate a single run, but preliminary results appeared as expected and were accepted as correct.  
+\hspace{5mm} The results of the two sets of data give us the following
+histograms and bifurcation diagrams. If our implementation is correct,
+the results using the load balancer and C++ will strongly resemble the
+results from the original MATLAB code. The nature of the equation
+makes the exact replication of a single run difficult; the problem
+involves random noise. Before implementing the ability to apply
+extreme constraints to the parameters, we could not replicate a single
+run, but preliminary results appeared as expected and were accepted as
+correct.  
+
 Further work after the presentation hardcoding the random coefficients into the C++ and Matlab code resulted in identical output and tested the correctness of our converted code.
 
 Results from running the program in  Matlab are slightly different for each simulation but seem follow a general pattern, which is the subject of the study. 
- 
-
 \begin {table}[H]
 \begin{center}
 \begin{tabular}{ p{8cm} p{8cm}}    
 \begin{center}\includegraphics[scale=0.3]{hist}\end{center}&\begin{center} \includegraphics[scale=0.4]{serial_hist}\end{center}
 \end{tabular}
 \caption {Load balanced histogram (left) and Serial histogram
-  (right). The histograms display the frequency of different period order orbits for given r and L values. They both indicate a tendency toward a high frequency of low order period orbits with few high order outliers.} \label{hist}
+  (right). The histograms display the frequency of different period order orbits for given $r$ and $L$ values. They both indicate a tendency toward a high frequency of low order period orbits with few high order outliers.} \label{hist}
 \end{center}
 \end {table}
 
@@ -440,7 +447,11 @@ Results from running the program in  Matlab are slightly different for each simu
  \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale=0.5]{Bifurcation_L5}
-\caption{Bifurcation with $L=0.5$}\label{lb_bif_5}
+\caption{Bifurcation with $L=0.5$. Increasing the correlation length
+  $L$ from 0.1 to 0.5 results in a very different bifurcation
+  diagram. The correlation length affects the distribution of the
+  random parameters by causing them to decrease exponentially
+  (equation $S_n$ in (\ref{randlog})).}\label{lb_bif_5}
 	\end{center}
 \end{figure}
 
