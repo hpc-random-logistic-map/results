@@ -94,7 +94,7 @@ results in terms of a histogram of observed periodic orbits and a
 bifurcation diagram. Single core optimization techniques,
 such as SIMD loop vectorization and function inlining, as well as
 using a dynamic load balancer for more efficient work distribution
-were applied. The HDF5 file format was used to store the simulation results in a better archival format. The benchmarking (weak scaling study) results imply the best
+were applied. The HDF5 file format was used to store the simulation results in a better archival format. The benchmarking (strong scaling study) results imply the best
 speedup and efficiency is gained when invoking the load balancer on
 one node (12 cores), although we tested our simulation over 16 nodes
 (192 cores). Improvements to this project include optimizing the
@@ -420,9 +420,10 @@ extreme constraints to the parameters, we could not replicate a single
 run, but preliminary results appeared as expected and were accepted as
 correct.  
 
-Further work after the presentation hardcoding the random coefficients into the C++ and Matlab code resulted in identical output and tested the correctness of our converted code.
-
-Results from running the program in  Matlab are slightly different for each simulation but seem follow a general pattern, which is the subject of the study. 
+Further work after the presentation hardcoding the random coefficients
+into the C++ and Matlab code resulted in identical output and tested
+the correctness of our converted code. Below are the results from the
+MATLAB and Load balanced implementations running two different simulations.
 \begin {table}[H]
 \begin{center}
 \begin{tabular}{ p{8cm} p{8cm}}    
@@ -482,7 +483,7 @@ processors.
 
 We found that the best Speedup and Efficiency occurred for one node
 (12 processors), though we may expect better Speedup and performance
-with more $r$ values tested (perhaps on the order of 100 instead of 40). It is possible the communication overhead was high in proportion to the amount of work given to each processor due to only finding the solution or 40 values of $r$.
+with more $r$ values tested (perhaps on the order of 100 instead of 40). It is possible the communication overhead was high in proportion to the amount of work given to each processor due to only finding the solution over 40 values of $r$.
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale=0.5]{efficiency_random_logistic}
@@ -503,7 +504,8 @@ Overall, the results of this investigation were positive. Since the
 serial and load balanced versions of the simulation fall in relatively
 the same range of values (Table \ref{hist} and Table \ref{bif}), we
 believe the load balanced versions output the
-accurate results. The histograms give us an idea of the sort of
+accurate results. Furthermore, we tested hardcoded random values
+between the two implementations and got identical results. The histograms give us an idea of the sort of
 periodic orbits that occur most frequently in the random logistic
 map. Table \ref{hist} shows that the
 most commonly observed orbit is period 1. The bifurcation diagrams
