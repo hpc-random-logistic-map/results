@@ -79,7 +79,7 @@
 \begin{document}
 \pagestyle{plain} %pagenumbers
 \title{CSCI 4/5576: The Random Logistic Map}
-\date{December 17, 2014}
+\date{December 16, 2014}
 \author{Amy Le (5576)\\Long Tat (4576)\\Emily Bertelson (4576)\\Kristina Entzel (4576)}
 \maketitle
 \section{Abstract}
@@ -87,7 +87,7 @@ The purpose of this investigation was to explore and simulate a
 spatially random logistic map using a dynamic load balancer on Janus, the CU
 supercomputer \cite{janus}. The recursive nature of the map prevents the individual
 fixed point iterations from being parallelized, but a set of
-iterations maybe load balanced over many cores. The original simulation was written in serial code in
+iterations may be load balanced over many cores. The original simulation was written in serial code in
 MATLAB. Our solution has modified the original version for efficiency,
 speed, and scalability. We implemented our simulation in C++ and present our
 results in terms of a histogram of observed periodic orbits and a
@@ -224,7 +224,7 @@ conditions. A load balancer suits our purposes perfectly because the
 load balancer will redistribute work over many processors to eliminate
 wait time. The general progression of the project is outlined below:
 \be
-\item Convert the Matlab code to C++
+\item Convert the MATLAB code to C++
 \item Confirm the C++ versions of the code that we each produce work
   together correctly by comparing to the serial version
 \item Invoke the load balancer to assign an initial condition to each
@@ -267,7 +267,7 @@ will distribute tasks over the available processors\footnote{Each task
 \ee
 
 \subsection{Original Serial Implementation in MATLAB}
-\hspace{5mm} Since Matlab is inherently slower than C++, we expect seeing the code
+\hspace{5mm} Since MATLAB is inherently slower than C++, we expect seeing the code
 speedup simply from porting the code to C++. Besides being written in serial, the code was slow due to some
 inefficient I/O practices. After running a fixed point iteration, the
 code would create a file and write the results to it. In other words,
@@ -407,13 +407,19 @@ bifurcation diagrams.
 \end{tabbing}
 
 \section{Results}
+\hspace{5mm} The results of the two sets of data give us the following histograms and bifurcation diagrams. If our implementation is correct, the results using the load balancer and C++ will strongly resemble the results from the original Matlab code. The nature of the equation makes the exact replication of a single run difficult -- the problem involves random noise. Before implementing the ability to apply extreme constraints to the parameters, we could not replicate a single run, but preliminary results appeared as expected and were accepted as correct.  
+Further work after the presentation hardcoding the random coefficients into the C++ and Matlab code resulted in identical output and tested the correctness of our converted code.
+
+Results from running the program in  Matlab are slightly different for each simulation but seem follow a general pattern, which is the subject of the study. 
+ 
 
 \begin {table}[H]
 \begin{center}
 \begin{tabular}{ p{8cm} p{8cm}}    
 \begin{center}\includegraphics[scale=0.3]{hist}\end{center}&\begin{center} \includegraphics[scale=0.4]{serial_hist}\end{center}
 \end{tabular}
-\caption {Load balanced histogram (left) and Serial histogram (right)} \label{hist}
+\caption {Load balanced histogram (left) and Serial histogram
+  (right). The histograms display the frequency of different period order orbits for given r and L values. They both indicate a tendency toward a high frequency of low order period orbits with few high order outliers.} \label{hist}
 \end{center}
 \end {table}
 
@@ -422,7 +428,12 @@ bifurcation diagrams.
 \begin{tabular}{ p{8cm} p{8cm}}    
 \begin{center}\includegraphics[scale=0.4]{Bifurcation_L1}\end{center}&\begin{center} \includegraphics[scale=0.4]{bif}\end{center}
 \end{tabular}
-\caption {Load balanced Bifurcation with $L=0.1$ (left) and Serial Bifurcation with $L=0.1$ (right)} \label{bif}
+\caption {Load balanced Bifurcation with $L=0.1$ (left) and Serial
+  Bifurcation with $L=0.1$ (right). The bifurcation diagrams plot the
+  variable $r$ versus the resulting $x$ values for a given $L$. We
+  observe bifurcations from the load balanced implementation occurring
+  in similar places as the serial implementation.
+} \label{bif}
 \end{center}
 \end {table}
 
