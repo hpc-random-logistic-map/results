@@ -18,10 +18,10 @@
 \citation{janus}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Load Balancer}{7}}
 \@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces A load balancer recognizes the number of processors that are going to be used and manages the workload distribution among them. It first assigns all processors a chunk of work, and when a processor finishes the load balancer assigns that processor more work.\relax }}{7}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.1}Write Locks}{8}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}HDF5}{8}}
 \citation{folk}
 \citation{UserGuide}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.1}Write Locks}{8}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}HDF5}{8}}
 \@writefile{toc}{\contentsline {section}{\numberline {4}Results}{9}}
 \@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces load balanced histogram\relax }}{9}}
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
@@ -34,10 +34,13 @@
 \newlabel{serial_bif}{{10}{11}}
 \@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Bifurcation with $L=0.5$\relax }}{11}}
 \newlabel{lb_bif_5}{{11}{11}}
-\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Efficiency\relax }}{12}}
-\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces Efficiency\relax }}{12}}
-\newlabel{speedup}{{13}{12}}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Conclusion}{12}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Benchmarking}{11}}
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Efficiency of our code. Running the simulation to generate a bifurcation diagram requires choosing a number of $r$ values you want to graph and running the fixed point iteration on a set of values for that $r$ and an associated set of random coefficients. This means executing \texttt  {generate\_rands.exe} for each $r$ to get the correct coefficients. The fixed problem size for benchmarking was testing 40 $r$ values between [0,4], and 1000 initial conditions $x_0$ in [0,1] for each value of $r$.\relax }}{12}}
+\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces Speedup of our code. For the serial run, \texttt  {generate\_rands.exe} was called 40 times and each initial condition executed serially. For the parallel cases we increase the number of nodes used (from 1 node to 16 nodes), run \texttt  {generate\_rands.exe} over each value of $r$ and call the load balancer which will distribute the work among the increased number of processors. \relax }}{13}}
+\newlabel{speedup}{{13}{13}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Conclusion}{13}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Future Work}{13}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.1.1}Post-simulation processing}{13}}
 \bibstyle{plain}
 \bibdata{annot}
 \bibcite{janus}{1}
@@ -46,7 +49,5 @@
 \bibcite{UserGuide}{4}
 \bibcite{lamb}{5}
 \bibcite{olivier}{6}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Future Work}{13}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.1.1}Post-simulation processing}{13}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.1.2}Scaling Study}{13}}
 \bibcite{dlb}{7}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.1.2}Scaling Study}{14}}

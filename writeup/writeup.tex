@@ -318,12 +318,19 @@ of $r$ and 1000 initial conditions.
 comma-separated value format, the HDF5 file format was chosen for
 final storage of the data. An intermediary step (\texttt{unique.py})
 removes redundancies from the .csv file before copying the data into
-an HDF5 file (via \texttt{csv2hdf5.py}). 
+an HDF5 file (via \texttt{csv2hdf5.py}). Two resources were used to
+implement the HDF5 aspect of the project \cite{folk} \cite{UserGuide}. 
 
-The hierarchical structures allowed by the HDF5 format were ideal for our uses. We developed a structure with the intention of making the data convenient and efficient to access for the production of a bifurcation diagram and histogram, as well as future analyses.
+The hierarchical structures allowed by the HDF5 format were ideal for our uses. We developed a structure with the intention of making the data convenient and efficient to access for the production of a bifurcation diagram and histogram, as well as future analysis.
 
-A structure for the file has been devised:
+The folowing is the structure of the output HDF5 file. Two groups
+within the root store the data twice, in different formats; group
+\texttt{arch} is used for plotting histograms, while group
+\texttt{bif} stores three-dimensional coordinates for plotting
+bifurcation diagrams.
+
 \begin{tabbing}
+\texttt{arch}\\
 	\hspace{5mm} group ``$r$'' \\
 		\hspace{10mm} group ``$L$'' \\
 		\hspace{15mm} group ``$p=1$'' \\
@@ -340,6 +347,7 @@ A structure for the file has been devised:
 \end{tabbing}
 
 \begin{tabbing}
+\texttt{bif}\\
   \hspace{5mm} group ``$L$'' \\
   \hspace{10mm} dataset \\
   \hspace{15mm} $ (x_{1}, r, p=1)$ \\
@@ -348,8 +356,6 @@ A structure for the file has been devised:
   \hspace{15mm} $ (x_{1},x_2,...x_k, r, p=k)$ \\
 \end{tabbing}
 
-From there, HDF5 compatibility will be implemented in code where
-relevant \cite{folk} \cite{UserGuide}. 
 \section{Results}
 \begin{figure}[H]
 	\begin{center}
@@ -383,16 +389,38 @@ relevant \cite{folk} \cite{UserGuide}.
 \caption{Bifurcation with $L=0.5$}\label{lb_bif_5}
 	\end{center}
 \end{figure}
+
+\subsection{Benchmarking}
+\hspace{5mm} The original code written in MATLAB took hours to run a
+simulation, and the optimized version of the code with the load
+balancer ran in approximately 30 minutes. The benchmarking was
+computed using the C++ code for homogeneity. We tested the code over
+16 nodes (192 processors). 
+
+We found that the best Speedup and Efficiency occurred for one node
+(12 processors), though we may expect better Speedup and performance
+with more $r$ values tested (perhaps on the order of 100 instead of 40). It is possible the communication overhead was high in proportion to the amount of work given to each processor due to only finding the solution or 40 values of $r$.
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale=0.5]{efficiency_random_logistic}
-\caption{Efficiency}
+\caption{Efficiency of our code. Running the simulation to generate a bifurcation diagram requires choosing a number of $r$ values you want to graph and running the fixed point
+  iteration on a set of values for that $r$ and an associated set of
+  random coefficients. This means executing
+  \texttt{generate\_rands.exe} for each $r$ to get the correct
+  coefficients. The fixed problem size for benchmarking was testing 40
+  $r$ values between [0,4], and 1000 initial conditions $x_0$ in [0,1]
+  for each value of $r$.}
 	\end{center}
 \end{figure}
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale=0.5]{speedup_random_logistic}
-\caption{Efficiency}\label{speedup}
+\caption{Speedup of our code. For the serial run,
+  \texttt{generate\_rands.exe} was called 40 times and each initial
+  condition executed serially. For the parallel cases we increase the number of nodes used (from 1 node to 16 nodes), run
+\texttt{generate\_rands.exe} over each value of $r$ and call the load
+balancer which will distribute the work among the increased number of
+processors. }\label{speedup}
 	\end{center}
 \end{figure}
 
