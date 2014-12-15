@@ -99,6 +99,7 @@ speedup and efficiency is gained when invoking the load balancer on
 one node (12 cores), although we tested our simulation over 16 nodes
 (192 cores). Improvements to this project include optimizing the
 post-simulation data processing. 
+\newpage
 \section{Introduction}
 \subsection{Deterministic case}
 \hspace{5mm}The Logistic map is a quadratic recursive equation on the domain
@@ -116,7 +117,7 @@ x_{n+1} = rx_n(1-x_n)
 of crossings (green) on the line $x_{n+1}=x_n$ (red). Between $r \in [0,3.5]$, we observe stable periodic orbits.}
 	\end{center}
 \end{figure}
-\begin{figure}[H]0rp
+\begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale=0.7]{chaos}
 \caption{Deterministic Logistic Map (blue) for $r=3.8$. There is a no
@@ -530,6 +531,7 @@ the load balancer) were larger, we would see a speedup graph that
 increases over some nodes and then plateaus for too many nodes. This
 investigation used 1,000 tasks, but a future scaling study would
 increase the number of tasks to about 10,000 or more.
+\newpage
 \bibliographystyle{apa}
 \bibliography{annot}
 

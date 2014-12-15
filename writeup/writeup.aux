@@ -1,45 +1,48 @@
 \relax 
 \citation{janus}
 \@writefile{toc}{\contentsline {section}{\numberline {1}Abstract}{1}}
-\@writefile{toc}{\contentsline {section}{\numberline {2}Introduction}{1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Deterministic case}{1}}
-\citation{athreya}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Introduction}{2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Deterministic case}{2}}
 \@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Deterministic Logistic Map (blue) for $r=3.2$. There is a stable period 4 orbit. The order of the period is calculated by counting the number of crossings (green) on the line $x_{n+1}=x_n$ (red). Between $r \in [0,3.5]$, we observe stable periodic orbits.\relax }}{2}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Deterministic Logistic Map (blue) for $r=3.8$. There is a no stable orbit. For values of $r \in [3.5,4]$, the system experiences the onset of chaos.\relax }}{2}}
+\citation{athreya}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Deterministic Logistic Map (blue) for $r=3.8$. There is a no stable orbit. For values of $r \in [3.5,4]$, the system experiences the onset of chaos.\relax }}{3}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Random case}{3}}
 \newlabel{randlog}{{1}{3}}
 \@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces One instance of a random logistic map (blue). The map has converged to a stable period 6 orbit (green). Notice the ``wiggliness'' in the parabola shape.\relax }}{4}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces A coarse demonstration of the upper (black) and lower (blue) bounds of the random logistic map. Sample realizations are shown in red.\relax }}{4}}
 \citation{lamb}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces A coarse demonstration of the upper (black) and lower (blue) bounds of the random logistic map. Sample realizations are shown in red.\relax }}{5}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Project Goals}{5}}
-\@writefile{toc}{\contentsline {section}{\numberline {3}Method}{5}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Workflow\relax }}{6}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Method}{6}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Workflow\relax }}{7}}
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{workflow}{{5}{6}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Original Serial Implementation in MATLAB}{7}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Single Core Optimization}{7}}
+\newlabel{workflow}{{5}{7}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Original Serial Implementation in MATLAB}{8}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Single Core Optimization}{8}}
+\@writefile{lol}{\contentsline {lstlisting}{rand\textunderscore ex.m}{8}}
 \citation{olivier}
 \citation{dlb}
 \citation{janus}
-\@writefile{lol}{\contentsline {lstlisting}{rand\textunderscore ex.m}{8}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Load Balancer}{8}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces A load balancer recognizes the number of processors that are going to be used and manages the workload distribution among them. It first assigns all processors a chunk of work, and when a processor finishes the load balancer assigns that processor more work.\relax }}{8}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Load Balancer}{9}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces A load balancer recognizes the number of processors that are going to be used and manages the workload distribution among them. It first assigns all processors a chunk of work, and when a processor finishes the load balancer assigns that processor more work.\relax }}{9}}
 \citation{folk}
 \citation{UserGuide}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.1}Write Locks}{9}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}HDF5}{9}}
-\@writefile{toc}{\contentsline {section}{\numberline {4}Results}{10}}
-\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Load balanced histogram (left) and Serial histogram (right). The histograms display the frequency of different period order orbits for given $r$ and $L$ values. They both indicate a tendency toward a high frequency of low order period orbits with few high order outliers.\relax }}{11}}
-\newlabel{hist}{{1}{11}}
-\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Load balanced Bifurcation with $L=0.1$ (left) and Serial Bifurcation with $L=0.1$ (right). The bifurcation diagrams plot the variable $r$ versus the resulting $x$ values for a given $L$. We observe bifurcations from the load balanced implementation occurring in similar places as the serial implementation. \relax }}{11}}
-\newlabel{bif}{{2}{11}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Bifurcation with $L=0.5$. Increasing the correlation length $L$ from 0.1 to 0.5 results in a very different bifurcation diagram. The correlation length affects the distribution of the random parameters by causing them to decrease exponentially (equation $S_n$ in (1\hbox {})).\relax }}{12}}
-\newlabel{lb_bif_5}{{7}{12}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Benchmarking}{12}}
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Efficiency of our code. We found that the best Efficiency occurred for one node (12 processors).\relax }}{13}}
-\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Speedup of our code. We found that the best Speedup occurred for one node (12 processors).\relax }}{13}}
-\newlabel{speedup}{{9}{13}}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Conclusion}{13}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.1}Write Locks}{10}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}HDF5}{10}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Results}{11}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Load balanced histogram (left) and Serial histogram (right). The histograms display the frequency of different period order orbits for given $r$ and $L$ values. They both indicate a tendency toward a high frequency of low order period orbits with few high order outliers.\relax }}{12}}
+\newlabel{hist}{{1}{12}}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Load balanced Bifurcation with $L=0.1$ (left) and Serial Bifurcation with $L=0.1$ (right). The bifurcation diagrams plot the variable $r$ versus the resulting $x$ values for a given $L$. We observe bifurcations from the load balanced implementation occurring in similar places as the serial implementation. \relax }}{12}}
+\newlabel{bif}{{2}{12}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Bifurcation with $L=0.5$. Increasing the correlation length $L$ from 0.1 to 0.5 results in a very different bifurcation diagram. The correlation length affects the distribution of the random parameters by causing them to decrease exponentially (equation $S_n$ in (1\hbox {})).\relax }}{13}}
+\newlabel{lb_bif_5}{{7}{13}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Benchmarking}{13}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Efficiency of our code. We found that the best Efficiency occurred for one node (12 processors).\relax }}{14}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Speedup of our code. We found that the best Speedup occurred for one node (12 processors).\relax }}{14}}
+\newlabel{speedup}{{9}{14}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Conclusion}{14}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Future Work}{15}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.1.1}Post-simulation processing}{15}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.1.2}Scaling Study}{15}}
 \bibstyle{apa}
 \bibdata{annot}
 \bibcite{athreya}{{1}{2000}{{Athreya and Dai}}{{}}}
@@ -48,7 +51,4 @@
 \bibcite{olivier}{{4}{2008}{{Olivier and Prins}}{{}}}
 \bibcite{janus}{{5}{2014}{{{Research Computing at University of Colorado Boulder}}}{{}}}
 \bibcite{UserGuide}{{6}{2014}{{{The HDF Group}}}{{}}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Future Work}{14}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.1.1}Post-simulation processing}{14}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.1.2}Scaling Study}{14}}
 \bibcite{dlb}{{7}{1993}{{Willibeek-LeMair and Reeves}}{{}}}
